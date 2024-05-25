@@ -1,0 +1,4 @@
+{
+    "cmake.configureOnOpen": true,
+    "avdmanager.emulator": "C:\\Users\\svenn\\AppData\\Local\\Android\\Sdk\\tools"
+}
