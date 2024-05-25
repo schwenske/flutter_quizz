@@ -1,5 +1,6 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quizz/screens/create_questions.dart';
 import 'package:flutter_quizz/screens/my_questions.dart';
 import 'package:flutter_quizz/screens/quizzen.dart';
 import 'package:flutter_quizz/screens/ranking.dart';
@@ -68,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                                 MaterialPageRoute<Quizzen>(
                                     builder: (context) => const Quizzen()));
                           },
-                          child: Text("Quizzen"))),
+                          child: const Text("Quizzen"))),
                   Padding(
                       padding: const EdgeInsets.all(buttonSpacing),
                       child: ElevatedButton(
@@ -78,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                                 MaterialPageRoute<MyQuestions>(
                                     builder: (context) => const MyQuestions()));
                           },
-                          child: Text("MyQuestions"))),
+                          child: const Text("MyQuestions"))),
                   Padding(
                       padding: const EdgeInsets.all(buttonSpacing),
                       child: ElevatedButton(
@@ -88,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                                 MaterialPageRoute<Ranking>(
                                     builder: (context) => const Ranking()));
                           },
-                          child: Text("Ranking"))),
+                          child: const Text("Ranking"))),
                   const Padding(
                       padding: EdgeInsets.all(buttonSpacing),
                       child: SignOutButton()),
@@ -98,6 +99,19 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute<Ranking>(
+                    builder: (context) => const CreateQuestions()));
+          }),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.purple,
+        child: Container(height: 30.0),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }
