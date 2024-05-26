@@ -21,4 +21,15 @@ class QuestionCard {
     result.addAll({"options": options});
     return result;
   }
+
+  QuestionCard copyWith({
+    String? id,
+    String? question,
+    Map<String, bool>? options,
+  }) {
+    return QuestionCard(
+        id: id ?? this.id,
+        question: question ?? this.question,
+        options: options ?? this.options);
+  }
 }

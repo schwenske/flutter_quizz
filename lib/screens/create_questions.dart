@@ -131,7 +131,7 @@ class _CreateQuestionsState extends State<CreateQuestions> {
           ),
         );
       }
-
+      print(questionCard);
       if (!mounted) return;
 
       Navigator.pop(context);

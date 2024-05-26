@@ -9,7 +9,7 @@ const questionCardCollection = "questionCards";
 class FirestoreQuestionRep implements QuestionRep {
   final FirebaseFirestore firestore;
 
-  FirestoreQuestionRep({
+  const FirestoreQuestionRep({
     required this.firestore,
   });
 
