@@ -55,6 +55,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '794990230464',
     projectId: 'flutter-quizz-a9ab4',
     authDomain: 'flutter-quizz-a9ab4.firebaseapp.com',
+    databaseURL:
+        'https://flutter-quizz-a9ab4-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'flutter-quizz-a9ab4.appspot.com',
   );
 
@@ -63,6 +65,8 @@ class DefaultFirebaseOptions {
     appId: '1:794990230464:android:020daf5b40f0b5e597e625',
     messagingSenderId: '794990230464',
     projectId: 'flutter-quizz-a9ab4',
+    databaseURL:
+        'https://flutter-quizz-a9ab4-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'flutter-quizz-a9ab4.appspot.com',
   );
 }
