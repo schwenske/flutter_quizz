@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quizz/data/model/question_card.dart';
 import 'package:flutter_quizz/data/repositories/firestore_question_rep.dart';
 
 class CreateQuestions extends StatefulWidget {
@@ -13,7 +14,7 @@ class _CreateQuestionsState extends State<CreateQuestions> {
   final _formKey = GlobalKey<FormState>();
 
   String? currentQuestion;
-  String? currentOption;
+  Map<String, bool> currentOption = <String, bool>{};
 
   late final FirestoreQuestionRep firestoreQuestionRep;
 
@@ -61,12 +62,79 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                       return null;
                     }
                   },
-                )
+                ),
+                for (var i = 0; i < 4; i++)
+                  ListTile(
+                    title: TextFormField(
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(color: Colors.blue),
+                      decoration: InputDecoration(labelText: 'Answer ${i + 1}'),
+                      onSaved: (value) {
+                        setState(() {
+                          currentOption['Answer ${i + 1}'] = true;
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Bitte Antwort eingeben";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    trailing: Checkbox(
+                      value: currentOption['Antwort ${i + 1}'] ?? false,
+                      onChanged: (value) {
+                        setState(() {
+                          currentOption['Antwort ${i + 1}'] = value!;
+                        });
+                      },
+                    ),
+                  ),
+                ElevatedButton(
+                    onPressed: () => _addQuestionCard(),
+                    child: Text('Speichern')),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _addQuestionCard() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      final questionCard = QuestionCard(
+          id: 'test', question: currentQuestion!, options: currentOption);
+
+      try {
+        await firestoreQuestionRep.addQuestionCard(questionCard);
+
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.blueGrey,
+            content: Text(
+              "Erfolgreich hinzugefügt",
+            ),
+          ),
+        );
+      } on Exception {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(
+              "Fehler beim Hinzufügen",
+            ),
+          ),
+        );
+      }
+
+      if (!mounted) return;
+
+      Navigator.pop(context);
+    }
   }
 }
