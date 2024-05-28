@@ -1,9 +1,12 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
 import 'package:flutter_quizz/data/repositories/firestore_question_rep.dart';
+
+FirebaseAuth auth = FirebaseAuth.instance;
+String userId = auth.currentUser!.uid;
 
 class CreateQuestions extends StatefulWidget {
   const CreateQuestions({super.key});
@@ -109,6 +112,7 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                       currentOption[answerList[2]] = boolList[2];
                       currentOption[answerList[3]] = boolList[3];
                       _addQuestionCard();
+                      debugPrint("Das ist die Nutzer ID: $userId");
                     },
                     child: const Text('Speichern')),
               ],
