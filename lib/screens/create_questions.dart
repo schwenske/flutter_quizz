@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
@@ -15,6 +17,13 @@ class _CreateQuestionsState extends State<CreateQuestions> {
 
   String? currentQuestion;
   Map<String, bool> currentOption = <String, bool>{};
+  late List<String> answerList = [
+    'Antwort1',
+    'Antwort2',
+    'Antwort3',
+    'Antwort4'
+  ];
+  List<bool> boolList = [false, false, false, false];
 
   late final FirestoreQuestionRep firestoreQuestionRep;
 
@@ -63,17 +72,17 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                     }
                   },
                 ),
-                for (var i = 0; i < 4; i++)
+                for (int i = 0; i < 4; i++)
                   ListTile(
                     title: TextFormField(
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
                           .copyWith(color: Colors.blue),
-                      decoration: InputDecoration(labelText: 'Answer ${i + 1}'),
-                      onSaved: (value) {
+                      decoration: InputDecoration(labelText: 'Answer'),
+                      onChanged: (value) {
                         setState(() {
-                          currentOption['Answer ${i + 1}'] = true;
+                          answerList[i] = value;
                         });
                       },
                       validator: (value) {
@@ -85,17 +94,23 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                       },
                     ),
                     trailing: Checkbox(
-                      value: currentOption['Antwort ${i + 1}'] ?? false,
+                      value: boolList[i] ?? false,
                       onChanged: (value) {
                         setState(() {
-                          currentOption['Antwort ${i + 1}'] = value!;
+                          boolList[i] = value!;
                         });
                       },
                     ),
                   ),
                 ElevatedButton(
-                    onPressed: () => _addQuestionCard(),
-                    child: Text('Speichern')),
+                    onPressed: () async {
+                      currentOption[answerList[0]] = boolList[0];
+                      currentOption[answerList[1]] = boolList[1];
+                      currentOption[answerList[2]] = boolList[2];
+                      currentOption[answerList[3]] = boolList[3];
+                      _addQuestionCard();
+                    },
+                    child: const Text('Speichern')),
               ],
             ),
           ),
@@ -131,7 +146,6 @@ class _CreateQuestionsState extends State<CreateQuestions> {
           ),
         );
       }
-      print(questionCard);
       if (!mounted) return;
 
       Navigator.pop(context);
