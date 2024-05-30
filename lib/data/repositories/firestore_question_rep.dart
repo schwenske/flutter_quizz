@@ -20,6 +20,8 @@ class FirestoreQuestionRep implements QuestionRep {
 
     final questionCardWithId = QuestionCard(
         id: emptyDocument.id,
+        tag: questionCard.tag,
+        author: questionCard.author,
         question: questionCard.question,
         options: questionCard.options);
     emptyDocument.set(questionCardWithId.toMap());

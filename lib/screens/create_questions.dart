@@ -19,6 +19,7 @@ class _CreateQuestionsState extends State<CreateQuestions> {
   final _formKey = GlobalKey<FormState>();
 
   String? currentQuestion;
+  Tag? currentTag;
   Map<String, bool> currentOption = <String, bool>{};
   late List<String> answerList = [
     'Antwort1',
@@ -56,6 +57,29 @@ class _CreateQuestionsState extends State<CreateQuestions> {
             key: _formKey,
             child: Column(
               children: <Widget>[
+                DropdownButtonFormField<Tag>(
+                  hint: Text(
+                    "Bitte wählen Sie einen Kurs aus:",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  items: [
+                    DropdownMenuItem(
+                      value: Tag.imt101,
+                      child: Text(
+                        "IMT101",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(color: Colors.brown),
+                      ),
+                    ),
+                  ],
+                  onChanged: (Tag? value) {
+                    currentTag = value;
+                  },
+                  validator: (value) =>
+                      value == null ? "Bitte Tag auswählen" : null,
+                ),
                 TextFormField(
                   style: Theme.of(context)
                       .textTheme
@@ -82,7 +106,7 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                           .textTheme
                           .bodyLarge!
                           .copyWith(color: Colors.blue),
-                      decoration: InputDecoration(labelText: 'Answer'),
+                      decoration: const InputDecoration(labelText: 'Answer'),
                       onChanged: (value) {
                         setState(() {
                           answerList[i] = value;
@@ -97,7 +121,7 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                       },
                     ),
                     trailing: Checkbox(
-                      value: boolList[i] ?? false,
+                      value: boolList[i],
                       onChanged: (value) {
                         setState(() {
                           boolList[i] = value!;
@@ -112,7 +136,6 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                       currentOption[answerList[2]] = boolList[2];
                       currentOption[answerList[3]] = boolList[3];
                       _addQuestionCard();
-                      debugPrint("Das ist die Nutzer ID: $userId");
                     },
                     child: const Text('Speichern')),
               ],
@@ -126,7 +149,11 @@ class _CreateQuestionsState extends State<CreateQuestions> {
   Future<void> _addQuestionCard() async {
     if (_formKey.currentState?.validate() ?? false) {
       final questionCard = QuestionCard(
-          id: 'test', question: currentQuestion!, options: currentOption);
+          id: 'test',
+          tag: currentTag!,
+          author: userId,
+          question: currentQuestion!,
+          options: currentOption);
 
       try {
         await firestoreQuestionRep.addQuestionCard(questionCard);
