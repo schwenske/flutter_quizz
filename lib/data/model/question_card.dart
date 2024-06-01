@@ -21,6 +21,17 @@ class QuestionCard {
     return 'QuestionCard(id: $id, tag: $tag, author: $author question: $question, options: $options)';
   }
 
+  factory QuestionCard.fromJson(String source) =>
+      QuestionCard.fromMap(jsonDecode(source));
+  factory QuestionCard.fromMap(Map<String, dynamic> map) {
+    return QuestionCard(
+        id: map["id"],
+        tag: Tag.values[map["tag"]],
+        author: map["author"],
+        question: map["question"],
+        options: Map.from(map["options"])); // prüfen!
+  }
+
   String toJson() => jsonEncode(toMap());
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};

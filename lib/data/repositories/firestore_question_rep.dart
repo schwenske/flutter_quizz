@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
 import 'package:flutter_quizz/data/repositories/question_rep.dart';
 
@@ -27,27 +28,85 @@ class FirestoreQuestionRep implements QuestionRep {
     emptyDocument.set(questionCardWithId.toMap());
   }
 
-  @override
-  FutureOr<void> deleteQuestionCard(QuestionCard questionCard) {
-    // TODO: implement deleteQuestionCard
-    throw UnimplementedError();
+  Stream<List<QuestionCard>> getQuestionCardStream() {
+    return firestore.collection(questionCardCollection).snapshots().map(
+          (snapshot) => snapshot.docs
+              .map((doc) => QuestionCard.fromMap(doc.data()))
+              .toList(),
+        );
   }
 
   @override
-  FutureOr<List<QuestionCard>> getAllQuestionCards() {
-    // TODO: implement getAllQuestionCards
-    throw UnimplementedError();
+  Future<List<QuestionCard>> getAllQuestionCards() async {
+    final questionCardSnapshots =
+        await firestore.collection(questionCardCollection).get();
+
+    final questionCardList = questionCardSnapshots.docs
+        .map((snapshot) => QuestionCard.fromMap(snapshot.data()))
+        .toList();
+
+    return questionCardList;
   }
 
   @override
-  FutureOr<QuestionCard?> getPetById(String id) {
-    // TODO: implement getPetById
-    throw UnimplementedError();
+  Future<QuestionCard?> getQuestionCardById(String questionCardId) async {
+    final document = await firestore
+        .collection(questionCardCollection)
+        .doc(questionCardId)
+        .get();
+
+    if (document.data() != null) {
+      return QuestionCard.fromMap(document.data()!);
+    }
+
+    return null;
   }
 
   @override
-  FutureOr<void> updateQuestionCard(QuestionCard questionCard) {
-    // TODO: implement updateQuestionCard
-    throw UnimplementedError();
+  Future<void> updateQuestionCard(
+    QuestionCard questionCard, {
+    @visibleForTesting String? testDocId,
+  }) async {
+    await firestore
+        .collection(questionCardCollection)
+        .doc(testDocId ?? questionCard.id)
+        .update(questionCard.toMap());
+  }
+
+  @override
+  Future<void> deleteQuestionCardById(String questionCardId) async {
+    await firestore
+        .collection(questionCardCollection)
+        .doc(questionCardId)
+        .delete();
+  }
+
+  Future<List<QuestionCard>> getQuestionCardByTag(Tag tag) async {
+    final questionCardSnapshot = await firestore
+        .collection(questionCardCollection)
+        .where("Tag", isEqualTo: tag.index)
+        .get();
+
+    final questionCardList = questionCardSnapshot.docs
+        .map(
+          (doc) => QuestionCard.fromMap(doc.data()),
+        )
+        .toList();
+
+    return questionCardList;
+  }
+
+  Future<QuestionCard?> getQuestionCardByUserId(
+      String questionCardUserId) async {
+    final document = await firestore
+        .collection(questionCardCollection)
+        .doc(questionCardUserId)
+        .get();
+
+    if (document.data() != null) {
+      return QuestionCard.fromMap(document.data()!);
+    }
+
+    return null;
   }
 }
