@@ -1,10 +1,11 @@
 import 'dart:convert';
 
-enum Tag { imt101, imt102, ipwa01, ipwa02 }
+//enum Tag { imt101, imt102, ipwa01, ipwa02 }
 
 class QuestionCard {
   final String id;
-  final Tag tag;
+  //final Tag tag;
+  final String tag;
   final String author;
   final String question;
   final Map<String, bool> options;
@@ -28,7 +29,8 @@ class QuestionCard {
   factory QuestionCard.fromMap(Map<String, dynamic> map) {
     return QuestionCard(
       id: map["id"],
-      tag: Tag.values[map["tag"]],
+      //tag: Tag.values[map["tag"]],
+      tag: map["tag"],
       author: map["author"],
       question: map["question"],
       options: Map.from(map["options"]),
@@ -40,7 +42,7 @@ class QuestionCard {
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
     result.addAll({"id": id});
-    result.addAll({"tag": tag.index});
+    result.addAll({"tag": tag});
     result.addAll({"author": author});
     result.addAll({"question": question});
     result.addAll({"options": options});
@@ -50,7 +52,7 @@ class QuestionCard {
 
   QuestionCard copyWith({
     String? id,
-    Tag? tag,
+    String? tag,
     String? author,
     String? question,
     Map<String, bool>? options,

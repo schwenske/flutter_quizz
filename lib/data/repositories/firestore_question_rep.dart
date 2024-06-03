@@ -87,10 +87,10 @@ class FirestoreQuestionRep implements QuestionRep {
         .delete();
   }
 
-  Future<List<QuestionCard>> getQuestionCardByTag(Tag tag) async {
+  Future<List<QuestionCard>> getQuestionCardByTag(String tag) async {
     final questionCardSnapshot = await firestore
         .collection(questionCardCollection)
-        .where("Tag", isEqualTo: tag.index)
+        .where("tag", isEqualTo: tag)
         .get();
 
     final questionCardList = questionCardSnapshot.docs

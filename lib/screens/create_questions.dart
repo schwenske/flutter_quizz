@@ -17,9 +17,9 @@ class CreateQuestions extends StatefulWidget {
 
 class _CreateQuestionsState extends State<CreateQuestions> {
   final _formKey = GlobalKey<FormState>();
-
+  List<String> tags = ['imt101', 'imt102', 'ipwa01', 'ipwa02'];
   String? currentQuestion;
-  Tag? currentTag;
+  String? currentTag;
   Map<String, bool> currentOption = <String, bool>{};
   late List<String> answerList = [
     'Antwort1',
@@ -58,25 +58,26 @@ class _CreateQuestionsState extends State<CreateQuestions> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                DropdownButtonFormField<Tag>(
+                DropdownButtonFormField<String>(
                   hint: Text(
                     "Bitte wählen Sie einen Kurs aus:",
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   items: [
-                    DropdownMenuItem(
-                      value: Tag.imt101,
-                      child: Text(
-                        "IMT101",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(color: Colors.brown),
+                    for (int i = 0; i <= 3; i++)
+                      DropdownMenuItem(
+                        value: tags.elementAt(i),
+                        child: Text(
+                          tags.elementAt(i),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(color: Colors.brown),
+                        ),
                       ),
-                    ),
                   ],
-                  onChanged: (Tag? value) {
-                    currentTag = value;
+                  onChanged: (value) {
+                    currentTag = value.toString();
                   },
                   validator: (value) =>
                       value == null ? "Bitte Tag auswählen" : null,
