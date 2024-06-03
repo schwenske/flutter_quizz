@@ -23,7 +23,7 @@ class _MyQuestionsState extends State<MyQuestions> {
     firestoreQuestionRep = FirestoreQuestionRep(
       firestore: FirebaseFirestore.instance,
     );
-    questionCardStream = firestoreQuestionRep.getQuestionCardStream();
+    questionCardStream = firestoreQuestionRep.getQuestionCardStreamByUserId();
   }
 
   @override

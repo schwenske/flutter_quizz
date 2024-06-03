@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
 import 'package:flutter_quizz/data/repositories/question_rep.dart';
 
 const questionCardCollection = "questionCards";
+FirebaseAuth auth = FirebaseAuth.instance;
+String userId = auth.currentUser!.uid;
 
 class FirestoreQuestionRep implements QuestionRep {
   final FirebaseFirestore firestore;
@@ -20,12 +24,13 @@ class FirestoreQuestionRep implements QuestionRep {
         await firestore.collection(questionCardCollection).add({});
 
     final questionCardWithId = QuestionCard(
-        id: emptyDocument.id,
-        tag: questionCard.tag,
-        author: questionCard.author,
-        question: questionCard.question,
-        options: questionCard.options,
-        reason: questionCard.reason);
+      id: emptyDocument.id,
+      tag: questionCard.tag,
+      author: questionCard.author,
+      question: questionCard.question,
+      options: questionCard.options,
+      reason: questionCard.reason,
+    );
     emptyDocument.set(questionCardWithId.toMap());
   }
 
@@ -95,6 +100,18 @@ class FirestoreQuestionRep implements QuestionRep {
         .toList();
 
     return questionCardList;
+  }
+
+  Stream<List<QuestionCard>> getQuestionCardStreamByUserId() {
+    return firestore
+        .collection(questionCardCollection)
+        .where('author', isEqualTo: userId)
+        .snapshots()
+        .map(
+          (snapshot) => snapshot.docs
+              .map((doc) => QuestionCard.fromMap(doc.data()))
+              .toList(),
+        );
   }
 
   Future<QuestionCard?> getQuestionCardByUserId(

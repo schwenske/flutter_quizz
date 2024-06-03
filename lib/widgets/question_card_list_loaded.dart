@@ -31,7 +31,8 @@ class QuestionCardListLoaded extends StatelessWidget {
                   Text(
                     questionCards[index].options.keys.elementAt(i),
                     style: TextStyle(color: Colors.red[800]),
-                  )
+                  ),
+              Text(questionCards[index].reason),
             ],
           ),
         );
