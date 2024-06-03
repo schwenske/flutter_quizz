@@ -28,6 +28,7 @@ class _CreateQuestionsState extends State<CreateQuestions> {
     'Antwort4'
   ];
   List<bool> boolList = [false, false, false, false];
+  String? currentReason;
 
   late final FirestoreQuestionRep firestoreQuestionRep;
 
@@ -129,6 +130,26 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                       },
                     ),
                   ),
+                TextFormField(
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(color: Colors.blue),
+                  decoration: const InputDecoration(
+                    labelText:
+                        "Erläuterungen warum was richtig und was falsch ist",
+                  ),
+                  onChanged: (value) {
+                    currentReason = value;
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Bitte Erläuterung eingeben";
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
                 ElevatedButton(
                     onPressed: () async {
                       currentOption[answerList[0]] = boolList[0];
@@ -153,7 +174,8 @@ class _CreateQuestionsState extends State<CreateQuestions> {
           tag: currentTag!,
           author: userId,
           question: currentQuestion!,
-          options: currentOption);
+          options: currentOption,
+          reason: currentReason!);
 
       try {
         await firestoreQuestionRep.addQuestionCard(questionCard);
