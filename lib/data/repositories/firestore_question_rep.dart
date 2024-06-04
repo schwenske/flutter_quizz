@@ -114,17 +114,18 @@ class FirestoreQuestionRep implements QuestionRep {
         );
   }
 
-  Future<QuestionCard?> getQuestionCardByUserId(
-      String questionCardUserId) async {
-    final document = await firestore
+  Future<List<QuestionCard>> getQuestionCardByUserId(String userId) async {
+    final questionCardSnapshot = await firestore
         .collection(questionCardCollection)
-        .doc(questionCardUserId)
+        .where("author", isEqualTo: userId)
         .get();
 
-    if (document.data() != null) {
-      return QuestionCard.fromMap(document.data()!);
-    }
+    final questionCardList = questionCardSnapshot.docs
+        .map(
+          (doc) => QuestionCard.fromMap(doc.data()),
+        )
+        .toList();
 
-    return null;
+    return questionCardList;
   }
 }

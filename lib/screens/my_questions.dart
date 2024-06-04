@@ -15,7 +15,8 @@ class MyQuestions extends StatefulWidget {
 
 class _MyQuestionsState extends State<MyQuestions> {
   late final FirestoreQuestionRep firestoreQuestionRep;
-  late Stream<List<QuestionCard>> questionCardStream;
+  //late Stream<List<QuestionCard>> questionCardStream;
+  late Future<List<QuestionCard>> questionCardBuilder;
 
   @override
   void initState() {
@@ -23,7 +24,8 @@ class _MyQuestionsState extends State<MyQuestions> {
     firestoreQuestionRep = FirestoreQuestionRep(
       firestore: FirebaseFirestore.instance,
     );
-    questionCardStream = firestoreQuestionRep.getQuestionCardStreamByUserId();
+    //questionCardStream = firestoreQuestionRep.getQuestionCardStreamByUserId();
+    questionCardBuilder = firestoreQuestionRep.getQuestionCardByUserId(userId);
   }
 
   @override
@@ -36,8 +38,8 @@ class _MyQuestionsState extends State<MyQuestions> {
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(24),
-        child: StreamBuilder<List<QuestionCard>>(
-          stream: questionCardStream,
+        child: FutureBuilder<List<QuestionCard>>(
+          future: questionCardBuilder,
           initialData: const [],
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
@@ -58,6 +60,29 @@ class _MyQuestionsState extends State<MyQuestions> {
             }
           },
         ),
+
+        /*StreamBuilder<List<QuestionCard>>(
+          stream: questionCardStream,
+          initialData: const [],
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+                return const QuestionCardListLoading();
+              case ConnectionState.active:
+              case ConnectionState.done:
+                if (snapshot.hasData) {
+                  return QuestionCardListLoaded(questionCards: snapshot.data!);
+                } else if (snapshot.hasError) {
+                  return const QuestionCardListError(
+                    message: "Error",
+                  );
+                } else {
+                  return const QuestionCardListError(message: 'Error2');
+                }
+            }
+          },
+        ),*/
       )),
     );
   }
