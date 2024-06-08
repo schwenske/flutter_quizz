@@ -1,14 +1,89 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quizz/data/model/question_card.dart';
+import 'package:flutter_quizz/data/repositories/firestore_question_rep.dart';
+import 'package:flutter_quizz/widgets/question_card_list_error.dart';
+import 'package:flutter_quizz/widgets/question_card_list_loading.dart';
+import 'package:flutter_quizz/widgets/question_card_single_loaded.dart';
 
-class Quizzen extends StatelessWidget {
+class Quizzen extends StatefulWidget {
   const Quizzen({super.key});
+
+  @override
+  State<Quizzen> createState() => _QuizzenState();
+}
+
+class _QuizzenState extends State<Quizzen> {
+  late final FirestoreQuestionRep firestoreQuestionRep;
+  late Future<List<QuestionCard>> questionCardBuilder;
+
+  @override
+  void initState() {
+    super.initState();
+    firestoreQuestionRep = FirestoreQuestionRep(
+      firestore: FirebaseFirestore.instance,
+    );
+    questionCardBuilder =
+        firestoreQuestionRep.getQuestionCardByTagAndCount('ipwa01', 3);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Quizzen"),
+        centerTitle: true,
+        title: const Text("MyQuestions"),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: FutureBuilder<List<QuestionCard>>(
+            future: questionCardBuilder,
+            initialData: const [],
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return const QuestionCardListLoading();
+                case ConnectionState.active:
+                case ConnectionState.done:
+                  if (snapshot.hasData) {
+                    return QuestionCardSingleLoaded(
+                        questionCards: snapshot.data!);
+                  } else if (snapshot.hasError) {
+                    return const QuestionCardListError(
+                      message: "Error",
+                    );
+                  } else {
+                    return const QuestionCardListError(message: 'Error2');
+                  }
+              }
+            },
+          ),
+        ),
       ),
     );
   }
+
+/*
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Quizzen',
+        ),
+      ),
+      body: Column(
+        children: [
+          Container(
+            child: Text('Question'),
+          ),
+          for (int i = 0; i < 4; i++) Container(child: Text('Fragen $i')),
+          Text(Random().nextInt(4).toString()),
+          Text(questionCardBuilder.toString())
+        ],
+      ),
+    );
+  }*/
 }

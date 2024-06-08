@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -127,5 +127,28 @@ class FirestoreQuestionRep implements QuestionRep {
         .toList();
 
     return questionCardList;
+  }
+
+  Future<List<QuestionCard>> getQuestionCardByTagAndCount(
+      String tag, int count) async {
+    final questionCardSnapshot = await firestore
+        .collection(questionCardCollection)
+        .where("tag", isEqualTo: tag)
+        .get();
+
+    Random random = Random();
+
+    final questionCardList = questionCardSnapshot.docs
+        .map(
+          (doc) => QuestionCard.fromMap(doc.data()),
+        )
+        .toList();
+    questionCardList.shuffle(random);
+    final List<QuestionCard> randomQuestionCardList = [];
+
+    for (int i = 0; i < count; i++) {
+      randomQuestionCardList.add(questionCardList[i]);
+    }
+    return randomQuestionCardList;
   }
 }
