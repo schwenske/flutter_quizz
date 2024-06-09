@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class QuizFilter extends StatefulWidget {
@@ -47,7 +45,7 @@ class _QuizFilterState extends State<QuizFilter> {
             },
             validator: (value) => value == null ? "Bitte Tag auswählen" : null,
           ),
-          DropdownButtonFormField<Int>(
+          DropdownButtonFormField<int>(
             hint: Text(
               "Bitte wählen Sie einen Kurs aus:",
               style: Theme.of(context).textTheme.bodyLarge,
@@ -55,7 +53,7 @@ class _QuizFilterState extends State<QuizFilter> {
             items: [
               for (int i = 0; i <= 3; i++)
                 DropdownMenuItem(
-                  value: count.elementAt(i) as Int,
+                  value: count.elementAt(i),
                   child: Text(
                     count.elementAt(i) as String,
                     style: Theme.of(context)
@@ -66,7 +64,7 @@ class _QuizFilterState extends State<QuizFilter> {
                 ),
             ],
             onChanged: (value) {
-              currentCount = value;
+              currentCount = String.parse(value);
             },
             validator: (value) => value == null ? "Bitte Tag auswählen" : null,
           ),
