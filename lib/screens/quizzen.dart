@@ -7,7 +7,9 @@ import 'package:flutter_quizz/widgets/question_card_list_loading.dart';
 import 'package:flutter_quizz/widgets/question_card_single_loaded.dart';
 
 class Quizzen extends StatefulWidget {
-  const Quizzen({super.key});
+  final String tag;
+  final int count;
+  const Quizzen({super.key, required this.tag, required this.count});
 
   @override
   State<Quizzen> createState() => _QuizzenState();
@@ -23,8 +25,8 @@ class _QuizzenState extends State<Quizzen> {
     firestoreQuestionRep = FirestoreQuestionRep(
       firestore: FirebaseFirestore.instance,
     );
-    questionCardBuilder =
-        firestoreQuestionRep.getQuestionCardByTagAndCount('ipwa01', 3);
+    questionCardBuilder = firestoreQuestionRep.getQuestionCardByTagAndCount(
+        widget.tag, widget.count);
   }
 
   @override

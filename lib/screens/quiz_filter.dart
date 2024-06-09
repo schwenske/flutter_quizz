@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quizz/screens/quizzen.dart';
 
 class QuizFilter extends StatefulWidget {
   const QuizFilter({super.key});
@@ -10,7 +11,7 @@ class QuizFilter extends StatefulWidget {
 class _QuizFilterState extends State<QuizFilter> {
   List<String> tags = ['imt101', 'imt102', 'ipwa01', 'ipwa02'];
   List<int> count = [3, 5, 10];
-  late int currentCount;
+  late int? currentCount;
   String? currentTag;
 
   @override
@@ -28,7 +29,7 @@ class _QuizFilterState extends State<QuizFilter> {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             items: [
-              for (int i = 0; i <= 3; i++)
+              for (int i = 0; i < tags.length; i++)
                 DropdownMenuItem(
                   value: tags.elementAt(i),
                   child: Text(
@@ -47,15 +48,15 @@ class _QuizFilterState extends State<QuizFilter> {
           ),
           DropdownButtonFormField<int>(
             hint: Text(
-              "Bitte wählen Sie einen Kurs aus:",
+              "Bitte wählen Sie die Anzahl der Fragen:",
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             items: [
-              for (int i = 0; i <= 3; i++)
+              for (int i = 0; i < count.length; i++)
                 DropdownMenuItem(
                   value: count.elementAt(i),
                   child: Text(
-                    count.elementAt(i) as String,
+                    count.elementAt(i).toString(),
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -64,10 +65,22 @@ class _QuizFilterState extends State<QuizFilter> {
                 ),
             ],
             onChanged: (value) {
-              currentCount = String.parse(value);
+              currentCount = value;
             },
-            validator: (value) => value == null ? "Bitte Tag auswählen" : null,
+            validator: (value) =>
+                value == null ? "Bitte Anzahl auswählen" : null,
           ),
+          Padding(
+              padding: const EdgeInsets.all(15),
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute<Quizzen>(
+                            builder: (context) => Quizzen(
+                                tag: currentTag!, count: currentCount!)));
+                  },
+                  child: const Text("Quizzen"))),
         ],
       ),
     ));
