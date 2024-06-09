@@ -2,7 +2,7 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/screens/create_questions.dart';
 import 'package:flutter_quizz/screens/my_questions.dart';
-import 'package:flutter_quizz/screens/quizzen.dart';
+import 'package:flutter_quizz/screens/quiz_filter.dart';
 import 'package:flutter_quizz/screens/ranking.dart';
 
 var titleName = "Quizz APP";
@@ -65,8 +65,8 @@ class HomeScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute<Quizzen>(
-                                    builder: (context) => const Quizzen()));
+                                MaterialPageRoute<QuizFilter>(
+                                    builder: (context) => const QuizFilter()));
                           },
                           child: const Text("Quizzen"))),
                   Padding(
