@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
 
 class QuestionCardGame extends StatefulWidget {

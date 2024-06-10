@@ -21,7 +21,7 @@ class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quizzen'),
+        title: const Text('Quizzen'),
       ),
       body: QuestionCardGame(
         questionCard: widget.questionCards[index],
