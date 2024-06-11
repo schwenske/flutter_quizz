@@ -17,6 +17,7 @@ class QuestionCardGame extends StatefulWidget {
 
 class _QuestionCardGameState extends State<QuestionCardGame> {
   List<bool> correctAnswer = [false, false, false, false];
+  bool checkAnswer = true;
 
   @override
   Widget build(BuildContext context) {
@@ -66,13 +67,24 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                     print('Error3');
                   }
                 }
-                correctAnswer.forEach((answer) {
-                  if (answer != true) {
-                    print('Diese Antwort ist falsch $answer');
-                  } else {
-                    print('Diese Antwort ist richtig $answer');
-                  }
-                });
+                for (int i = 0; i < correctAnswer.length; i++) {
+                  if (correctAnswer[i] == false) {
+                    checkAnswer = false;
+                  } else {}
+                }
+                print(checkAnswer);
+                if (checkAnswer == false) {
+                  print('Sie erhalten keine Punkte, die Antworten: ');
+                  widget.questionCard.options.forEach((key, value) {
+                    if (!value) {
+                      print('Die Antwort $key ist falsch');
+                    }
+                  });
+                  print('Hinweis: ${widget.questionCard.reason}');
+                } else {
+                  print('Sie erhalten 5 Punkte');
+                }
+                checkAnswer = true;
               },
               child: const Text('bestätigen'),
             ),

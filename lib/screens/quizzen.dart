@@ -66,26 +66,4 @@ class _QuizzenState extends State<Quizzen> {
       ),
     );
   }
-
-/*
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Quizzen',
-        ),
-      ),
-      body: Column(
-        children: [
-          Container(
-            child: Text('Question'),
-          ),
-          for (int i = 0; i < 4; i++) Container(child: Text('Fragen $i')),
-          Text(Random().nextInt(4).toString()),
-          Text(questionCardBuilder.toString())
-        ],
-      ),
-    );
-  }*/
 }
