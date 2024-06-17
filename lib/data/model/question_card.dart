@@ -4,7 +4,6 @@ import 'dart:convert';
 
 class QuestionCard {
   final String id;
-  //final Tag tag;
   final String tag;
   final String author;
   final String question;

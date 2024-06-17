@@ -1,46 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
+import 'package:flutter_quizz/data/model/question_condition.dart';
 
 class QuestionCardGame extends StatefulWidget {
   final QuestionCard questionCard;
-  final List<Color> color;
-  final List<bool> currentBool;
+  final QuestionCondition questionCondition;
+
   const QuestionCardGame(
-      {super.key,
-      required this.questionCard,
-      required this.color,
-      required this.currentBool});
+      {super.key, required this.questionCard, required this.questionCondition});
 
   @override
   State<QuestionCardGame> createState() => _QuestionCardGameState();
 }
 
 class _QuestionCardGameState extends State<QuestionCardGame> {
-  List<bool> correctAnswer = [false, false, false, false];
-  bool checkAnswer = true;
-
   @override
   Widget build(BuildContext context) {
+    bool checkAnswer = true;
+    List<Color> gameCardColor = widget.questionCondition.currentColor;
+    bool enableWriteCondition = widget.questionCondition.writeCondition;
+    List<bool> gameCardCurrentBool = widget.questionCondition.currentBool;
+    List<bool> correctAnswer = [false, false, false, false];
     return Column(
       children: [
         Text(widget.questionCard.question),
         for (int i = 0; i < widget.questionCard.options.keys.length; i++)
           Card(
-            color: widget.color[i],
+            color: gameCardColor[i],
             child: InkWell(
               splashColor: Colors.blue,
               onTap: () {
                 setState(() {
-                  if (widget.color[i] == Colors.white) {
-                    widget.color[i] = Colors.green;
-                    widget.currentBool[i] = true;
-                  } else if (widget.color[i] == Colors.green) {
-                    widget.color[i] = Colors.red;
-                    widget.currentBool[i] = false;
-                  } else {
-                    widget.color[i] = Colors.green;
-                    widget.currentBool[i] = true;
-                  }
+                  if (enableWriteCondition == true) {
+                    if (gameCardColor[i] == Colors.white) {
+                      gameCardColor[i] = Colors.green;
+                      gameCardCurrentBool[i] = true;
+                    } else {
+                      gameCardColor[i] = Colors.white;
+                      gameCardCurrentBool[i] = false;
+                    }
+                  } else {}
                 });
               },
               child: SizedBox(
@@ -52,39 +51,69 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
           children: [
             ElevatedButton(
               onPressed: () {
-                for (int i = 0;
-                    i < widget.questionCard.options.keys.length;
-                    i++) {
-                  if ((widget.color[i] != Colors.white) &&
-                      (widget.questionCard.options.values.elementAt(i) ==
-                          widget.currentBool[i])) {
-                    correctAnswer[i] = true;
-                  } else if ((widget.color[i] != Colors.white) &&
-                      (widget.questionCard.options.values.elementAt(i) !=
-                          widget.currentBool[i])) {
-                    correctAnswer[i] = false;
-                  } else {
-                    print('Error3');
-                  }
-                }
-                for (int i = 0; i < correctAnswer.length; i++) {
-                  if (correctAnswer[i] == false) {
-                    checkAnswer = false;
-                  } else {}
-                }
-                print(checkAnswer);
-                if (checkAnswer == false) {
-                  print('Sie erhalten keine Punkte, die Antworten: ');
-                  widget.questionCard.options.forEach((key, value) {
-                    if (!value) {
-                      print('Die Antwort $key ist falsch');
-                    }
-                  });
-                  print('Hinweis: ${widget.questionCard.reason}');
+                if (enableWriteCondition == false) {
                 } else {
-                  print('Sie erhalten 5 Punkte');
+                  for (int i = 0;
+                      i < widget.questionCard.options.keys.length;
+                      i++) {
+                    if ((gameCardColor[i] == Colors.green) &&
+                        (widget.questionCard.options.values.elementAt(i) ==
+                            gameCardCurrentBool[i])) {
+                      correctAnswer[i] = true;
+                    } else if ((gameCardColor[i] == Colors.white) &&
+                        (widget.questionCard.options.values.elementAt(i) ==
+                            gameCardCurrentBool[i])) {
+                      correctAnswer[i] = true;
+                    } else {}
+                  }
+                  for (int i = 0; i < correctAnswer.length; i++) {
+                    if (correctAnswer[i] == false) {
+                      checkAnswer = false;
+                    } else {}
+                  }
+                  print(checkAnswer);
+                  if (checkAnswer == false) {
+                    widget.questionCard.options.forEach((key, value) {
+                      if (!value) {
+                        widget.questionCondition.answerList.add(key);
+                      }
+                    });
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title:
+                                const Text('Folgende Antworten sind falsch:'),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: [
+                                  for (int i = 0;
+                                      i <
+                                          widget.questionCondition.answerList
+                                              .length;
+                                      i++)
+                                    Text(
+                                        widget.questionCondition.answerList[i]),
+                                  Text(
+                                      'Bitte beachten Sie dabei folgenden Grund ${widget.questionCard.reason}'),
+                                ],
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                  child: const Text('ok'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  })
+                            ],
+                          );
+                        });
+                  } else {
+                    print('Sie erhalten 5 Punkte');
+                  }
+                  print('erfolg1');
                 }
-                checkAnswer = true;
+                enableWriteCondition = false;
               },
               child: const Text('bestätigen'),
             ),

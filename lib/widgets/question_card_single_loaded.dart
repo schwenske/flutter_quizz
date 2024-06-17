@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
+import 'package:flutter_quizz/data/model/question_condition.dart';
 import 'package:flutter_quizz/widgets/question_card_game.dart';
 
 class QuestionCardSingleLoaded extends StatefulWidget {
@@ -24,12 +25,8 @@ class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
         title: const Text('Quizzen'),
       ),
       body: QuestionCardGame(
-        questionCard: widget.questionCards[index],
-        // ignore: prefer_const_literals_to_create_immutables
-        color: [Colors.white, Colors.white, Colors.white, Colors.white],
-        // ignore: prefer_const_literals_to_create_immutables
-        currentBool: [false, false, false, false],
-      ),
+          questionCard: widget.questionCards[index],
+          questionCondition: QuestionCondition()),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.arrow_right),
         onPressed: () {
