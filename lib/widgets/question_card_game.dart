@@ -1,37 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
-import 'package:flutter_quizz/data/model/question_condition.dart';
 
 class QuestionCardGame extends StatefulWidget {
   final QuestionCard questionCard;
-  final QuestionCondition questionCondition;
 
-  const QuestionCardGame(
-      {super.key, required this.questionCard, required this.questionCondition});
+  const QuestionCardGame({super.key, required this.questionCard});
 
   @override
   State<QuestionCardGame> createState() => _QuestionCardGameState();
 }
 
+bool isBlocked = false;
+List<Color> gameCardColor = [
+  Colors.white,
+  Colors.white,
+  Colors.white,
+  Colors.white
+];
+List<bool> gameCardCurrentBool = [false, false, false, false];
+List<bool> correctAnswer = [false, false, false, false];
+List<String> answerList = [];
+
 class _QuestionCardGameState extends State<QuestionCardGame> {
   @override
   Widget build(BuildContext context) {
     bool checkAnswer = true;
-    List<Color> gameCardColor = widget.questionCondition.currentColor;
-    bool enableWriteCondition = widget.questionCondition.writeCondition;
-    List<bool> gameCardCurrentBool = widget.questionCondition.currentBool;
-    List<bool> correctAnswer = [false, false, false, false];
-    return Column(
-      children: [
-        Text(widget.questionCard.question),
-        for (int i = 0; i < widget.questionCard.options.keys.length; i++)
-          Card(
-            color: gameCardColor[i],
-            child: InkWell(
-              splashColor: Colors.blue,
-              onTap: () {
-                setState(() {
-                  if (enableWriteCondition == true) {
+    return AbsorbPointer(
+      absorbing: isBlocked,
+      child: Column(
+        children: [
+          Text(widget.questionCard.question),
+          for (int i = 0; i < widget.questionCard.options.keys.length; i++)
+            Card(
+              color: gameCardColor[i],
+              child: InkWell(
+                splashColor: Colors.blue,
+                onTap: () {
+                  setState(() {
                     if (gameCardColor[i] == Colors.white) {
                       gameCardColor[i] = Colors.green;
                       gameCardCurrentBool[i] = true;
@@ -39,20 +44,20 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                       gameCardColor[i] = Colors.white;
                       gameCardCurrentBool[i] = false;
                     }
-                  } else {}
-                });
-              },
-              child: SizedBox(
-                child: Text(widget.questionCard.options.keys.elementAt(i)),
+                  });
+                },
+                child: SizedBox(
+                  child: Text(widget.questionCard.options.keys.elementAt(i)),
+                ),
               ),
             ),
-          ),
-        ButtonBar(
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                if (enableWriteCondition == false) {
-                } else {
+          ButtonBar(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    isBlocked = true;
+                  });
                   for (int i = 0;
                       i < widget.questionCard.options.keys.length;
                       i++) {
@@ -71,11 +76,10 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                       checkAnswer = false;
                     } else {}
                   }
-                  print(checkAnswer);
                   if (checkAnswer == false) {
                     widget.questionCard.options.forEach((key, value) {
                       if (!value) {
-                        widget.questionCondition.answerList.add(key);
+                        answerList.add(key);
                       }
                     });
                     showDialog(
@@ -87,13 +91,8 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                             content: SingleChildScrollView(
                               child: ListBody(
                                 children: [
-                                  for (int i = 0;
-                                      i <
-                                          widget.questionCondition.answerList
-                                              .length;
-                                      i++)
-                                    Text(
-                                        widget.questionCondition.answerList[i]),
+                                  for (int i = 0; i < answerList.length; i++)
+                                    Text(answerList[i]),
                                   Text(
                                       'Bitte beachten Sie dabei folgenden Grund ${widget.questionCard.reason}'),
                                 ],
@@ -109,17 +108,36 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                           );
                         });
                   } else {
-                    print('Sie erhalten 5 Punkte');
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text(
+                                'Sie haben alles richtig beantwortet'),
+                            content: const SingleChildScrollView(
+                              child: ListBody(
+                                children: [
+                                  Text('Sie erhalten 5 Punkte'),
+                                ],
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                  child: const Text('ok'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  })
+                            ],
+                          );
+                        });
                   }
-                  print('erfolg1');
-                }
-                enableWriteCondition = false;
-              },
-              child: const Text('bestätigen'),
-            ),
-          ],
-        )
-      ],
+                },
+                child: const Text('bestätigen'),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
