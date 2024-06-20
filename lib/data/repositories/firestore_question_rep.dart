@@ -5,13 +5,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
+import 'package:flutter_quizz/data/model/user_ranking.dart';
 import 'package:flutter_quizz/data/repositories/question_rep.dart';
 
 const questionCardCollection = "questionCards";
+const userRankingCollection = "userRankings";
+
 FirebaseAuth auth = FirebaseAuth.instance;
 String userId = auth.currentUser!.uid;
 
-class FirestoreQuestionRep implements QuestionRep {
+class FirestoreQuestionRep implements QuestionRep, UserRanking {
   final FirebaseFirestore firestore;
 
   const FirestoreQuestionRep({
@@ -150,5 +153,64 @@ class FirestoreQuestionRep implements QuestionRep {
       randomQuestionCardList.add(questionCardList[i]);
     }
     return randomQuestionCardList;
+  }
+
+  Future<void> addUserRanking(UserRanking userRanking) async {
+    final emptyDocument =
+        await firestore.collection(userRankingCollection).add({});
+
+    final userRankingWithId =
+        UserRanking(id: userRanking.id, counter: userRanking.counter);
+    emptyDocument.set(userRankingWithId.toMap());
+  }
+
+/*
+  Future<void> updateUserRanking(
+    UserRanking userRanking, {
+    @visibleForTesting String? testDocId,
+  }) async {
+    await firestore
+        .collection(userRankingCollection)
+        .doc(userRanking.userId)
+        .update(userRanking.toMap());
+  }
+*/
+  Future<UserRanking?> getUserRankingId(String userRankingId) async {
+    final document = await firestore
+        .collection(userRankingCollection)
+        .doc(userRankingId)
+        .get();
+
+    if (document.data() != null) {
+      return UserRanking.fromMap(document.data()!);
+    }
+
+    return null;
+  }
+
+  @override
+  // TODO: implement counter
+  int get counter => throw UnimplementedError();
+
+  @override
+  // TODO: implement id
+  String get id => throw UnimplementedError();
+
+  @override
+  String toJson() {
+    // TODO: implement toJson
+    throw UnimplementedError();
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    // TODO: implement toMap
+    throw UnimplementedError();
+  }
+
+  @override
+  UserRanking copyWith({String? id, String? userId, int? counter}) {
+    // TODO: implement copyWith
+    throw UnimplementedError();
   }
 }

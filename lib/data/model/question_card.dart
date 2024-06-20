@@ -28,7 +28,6 @@ class QuestionCard {
   factory QuestionCard.fromMap(Map<String, dynamic> map) {
     return QuestionCard(
       id: map["id"],
-      //tag: Tag.values[map["tag"]],
       tag: map["tag"],
       author: map["author"],
       question: map["question"],

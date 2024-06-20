@@ -1,5 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
+import 'package:flutter_quizz/data/model/user_ranking.dart';
+import 'package:flutter_quizz/data/repositories/firestore_question_rep.dart';
+
+FirebaseAuth auth = FirebaseAuth.instance;
+String userId = auth.currentUser!.uid;
 
 class QuestionCardGame extends StatefulWidget {
   final QuestionCard questionCard;
@@ -20,8 +27,21 @@ List<Color> gameCardColor = [
 List<bool> gameCardCurrentBool = [false, false, false, false];
 List<bool> correctAnswer = [false, false, false, false];
 List<String> answerList = [];
+int pointCounter = 0;
 
 class _QuestionCardGameState extends State<QuestionCardGame> {
+  late final FirestoreQuestionRep firestoreQuestionRep;
+  String? currentUserId;
+  int? currentCounter;
+
+  @override
+  void initState() {
+    super.initState();
+
+    firestoreQuestionRep =
+        FirestoreQuestionRep(firestore: FirebaseFirestore.instance);
+  }
+
   @override
   Widget build(BuildContext context) {
     bool checkAnswer = true;
@@ -108,6 +128,10 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                           );
                         });
                   } else {
+                    currentUserId = userId;
+                    currentCounter = 5;
+                    _addUserRanking();
+                    pointCounter += 5;
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -139,5 +163,33 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
         ],
       ),
     );
+  }
+
+  Future<void> _addUserRanking() async {
+    final userRanking =
+        UserRanking(id: currentUserId!, counter: currentCounter!);
+    try {
+      await firestoreQuestionRep.addUserRanking(userRanking);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.blueGrey,
+          content: Text(
+            "Erfolgreich hinzugefügt",
+          ),
+        ),
+      );
+    } on Exception {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            "Fehler beim Hinzufügen",
+          ),
+        ),
+      );
+    }
+    if (!mounted) return;
+    Navigator.pop(context);
   }
 }

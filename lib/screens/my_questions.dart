@@ -24,7 +24,6 @@ class _MyQuestionsState extends State<MyQuestions> {
     firestoreQuestionRep = FirestoreQuestionRep(
       firestore: FirebaseFirestore.instance,
     );
-    //questionCardStream = firestoreQuestionRep.getQuestionCardStreamByUserId();
     questionCardBuilder = firestoreQuestionRep.getQuestionCardByUserId(userId);
   }
 
@@ -60,29 +59,6 @@ class _MyQuestionsState extends State<MyQuestions> {
             }
           },
         ),
-
-        /*StreamBuilder<List<QuestionCard>>(
-          stream: questionCardStream,
-          initialData: const [],
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-              case ConnectionState.waiting:
-                return const QuestionCardListLoading();
-              case ConnectionState.active:
-              case ConnectionState.done:
-                if (snapshot.hasData) {
-                  return QuestionCardListLoaded(questionCards: snapshot.data!);
-                } else if (snapshot.hasError) {
-                  return const QuestionCardListError(
-                    message: "Error",
-                  );
-                } else {
-                  return const QuestionCardListError(message: 'Error2');
-                }
-            }
-          },
-        ),*/
       )),
     );
   }
