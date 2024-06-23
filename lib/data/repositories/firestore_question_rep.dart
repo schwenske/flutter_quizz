@@ -156,36 +156,34 @@ class FirestoreQuestionRep implements QuestionRep, UserRanking {
   }
 
   Future<void> addUserRanking(UserRanking userRanking) async {
-    final emptyDocument =
-        await firestore.collection(userRankingCollection).add({});
+    // final emptyDocument =
+    //await firestore.collection(userRankingCollection).add({});
+    final String documentId = userId;
+    final docRef = firestore.collection('userRankings').doc(documentId);
 
-    final userRankingWithId =
+    final userRankingData =
         UserRanking(id: userRanking.id, counter: userRanking.counter);
-    emptyDocument.set(userRankingWithId.toMap());
+    docRef.set(userRankingData.toMap()).then((_) {});
   }
 
-/*
-  Future<void> updateUserRanking(
-    UserRanking userRanking, {
-    @visibleForTesting String? testDocId,
-  }) async {
-    await firestore
-        .collection(userRankingCollection)
-        .doc(userRanking.userId)
-        .update(userRanking.toMap());
-  }
-*/
-  Future<UserRanking?> getUserRankingId(String userRankingId) async {
+  Future<int> getUserRankingCounterById(String userRankingId) async {
     final document = await firestore
         .collection(userRankingCollection)
         .doc(userRankingId)
         .get();
 
     if (document.data() != null) {
-      return UserRanking.fromMap(document.data()!);
+      return UserRanking.fromMap(document.data()!).counter;
     }
+    return -1;
+  }
 
-    return null;
+  Future<void> updateCounter(String documentId, int newCounterValue) async {
+    final docRef = firestore.collection('userRankings').doc(documentId);
+
+    await docRef.update({
+      'counter': newCounterValue,
+    });
   }
 
   @override

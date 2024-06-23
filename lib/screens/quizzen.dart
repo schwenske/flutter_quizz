@@ -34,7 +34,7 @@ class _QuizzenState extends State<Quizzen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("MyQuestions"),
+        title: const Text("Quizzen"),
       ),
       body: SafeArea(
         child: Padding(

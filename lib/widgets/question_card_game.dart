@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +34,8 @@ int pointCounter = 0;
 class _QuestionCardGameState extends State<QuestionCardGame> {
   late final FirestoreQuestionRep firestoreQuestionRep;
   String? currentUserId;
-  int? currentCounter;
+  late int userCounter;
+  late int currentCounter;
 
   @override
   void initState() {
@@ -74,7 +77,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
           ButtonBar(
             children: [
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   setState(() {
                     isBlocked = true;
                   });
@@ -128,10 +131,16 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                           );
                         });
                   } else {
-                    currentUserId = userId;
-                    currentCounter = 5;
-                    _addUserRanking();
-                    pointCounter += 5;
+                    currentCounter = await checkCounter();
+                    if (currentCounter == -1) {
+                      currentUserId = userId;
+                      currentCounter = 5;
+                      _addUserRanking();
+                    } else {
+                      int newCounterValue = currentCounter + 5;
+                      await firestoreQuestionRep.updateCounter(
+                          userId, newCounterValue);
+                    }
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -167,7 +176,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
 
   Future<void> _addUserRanking() async {
     final userRanking =
-        UserRanking(id: currentUserId!, counter: currentCounter!);
+        UserRanking(id: currentUserId!, counter: currentCounter);
     try {
       await firestoreQuestionRep.addUserRanking(userRanking);
       if (!mounted) return;
@@ -191,5 +200,10 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
     }
     if (!mounted) return;
     Navigator.pop(context);
+  }
+
+  Future<int> checkCounter() async {
+    userCounter = await firestoreQuestionRep.getUserRankingCounterById(userId);
+    return userCounter;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
+import 'package:flutter_quizz/widgets/game_over_widget.dart';
 import 'package:flutter_quizz/widgets/question_card_game.dart';
 
 class QuestionCardSingleLoaded extends StatefulWidget {
@@ -23,7 +24,13 @@ class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
       appBar: AppBar(
         title: const Text('Quizzen'),
       ),
-      body: QuestionCardGame(questionCard: widget.questionCards[index]),
+      body: Column(
+        children: [
+          if (index < widget.questionCards.length)
+            QuestionCardGame(questionCard: widget.questionCards[index]),
+          if (index >= widget.questionCards.length) const GameOverWidget(),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.arrow_right),
         onPressed: () {
