@@ -32,10 +32,6 @@ class _QuizzenState extends State<Quizzen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Quizzen"),
-      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
