@@ -4,7 +4,7 @@ import 'package:flutter_quizz/screens/create_questions.dart';
 import 'package:flutter_quizz/screens/my_questions.dart';
 import 'package:flutter_quizz/screens/quiz_filter.dart';
 import 'package:flutter_quizz/screens/ranking.dart';
-import 'package:flutter_quizz/widgets/custom_Button.dart';
+import 'package:flutter_quizz/widgets/custom_button.dart';
 
 var titleName = "Quizz APP";
 const double buttonSpacing = 15;
