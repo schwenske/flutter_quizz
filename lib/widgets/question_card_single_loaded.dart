@@ -18,37 +18,59 @@ class QuestionCardSingleLoaded extends StatefulWidget {
 
 class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
   int index = 0;
+  bool isVisible = true;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Quizzen'),
-      ),
-      body: Column(
-        children: [
-          if (index < widget.questionCards.length)
-            QuestionCardGame(questionCard: widget.questionCards[index]),
-          if (index >= widget.questionCards.length) const GameOverWidget(),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.arrow_right),
-        onPressed: () {
-          setState(() {
-            index++;
-            isBlocked = false;
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Quizzen",
+            style: Theme.of(context).textTheme.displaySmall,
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Center(
+              child: Column(
+                children: [
+                  if (index < widget.questionCards.length)
+                    QuestionCardGame(questionCard: widget.questionCards[index]),
+                  if (index >= widget.questionCards.length)
+                    const GameOverWidget(),
+                ],
+              ),
+            ),
+          ),
+        ),
+        floatingActionButton: Visibility(
+          visible: isVisible,
+          child: FloatingActionButton(
+            child: const Icon(Icons.arrow_right),
+            onPressed: () {
+              setState(() {
+                index++;
+                isBlocked = false;
 
-            gameCardCurrentBool = [false, false, false, false];
-            gameCardColor = [
-              Colors.white,
-              Colors.white,
-              Colors.white,
-              Colors.white
-            ];
-            correctAnswer = [false, false, false, false];
-            answerList = [];
-          });
-        },
+                gameCardCurrentBool = [false, false, false, false];
+                gameCardColor = [
+                  Colors.white,
+                  Colors.white,
+                  Colors.white,
+                  Colors.white
+                ];
+                correctAnswer = [false, false, false, false];
+                answerList = [];
+                if (index >= widget.questionCards.length) {
+                  isVisible = false;
+                }
+              });
+            },
+          ),
+        ),
       ),
     );
   }
