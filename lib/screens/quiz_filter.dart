@@ -89,11 +89,20 @@ class _QuizFilterState extends State<QuizFilter> {
                     padding: const EdgeInsets.only(top: 150),
                     child: CustomButton(
                         onPressed: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute<Quizzen>(
-                                  builder: (context) => Quizzen(
-                                      tag: currentTag!, count: currentCount!)));
+                          if (currentTag != null && currentCount != null) {
+                            try {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute<Quizzen>(
+                                      builder: (context) => Quizzen(
+                                          tag: currentTag!,
+                                          count: currentCount!)));
+                            } catch (e) {
+                              print(e.toString());
+                            }
+                          } else {
+                            print('fehler');
+                          }
                         },
                         label: "Quizzen"),
                   ),
