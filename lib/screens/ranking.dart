@@ -5,9 +5,14 @@ class Ranking extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Ranking"),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text("Ranking"),
+          ),
+        ),
       ),
     );
   }

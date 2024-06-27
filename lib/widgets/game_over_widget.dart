@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quizz/screens/home.dart';
+import 'package:flutter_quizz/widgets/custom_button.dart';
+import 'package:flutter_quizz/widgets/question_card_single_loaded.dart';
 
 class GameOverWidget extends StatefulWidget {
   final int points;
@@ -10,7 +13,6 @@ class GameOverWidget extends StatefulWidget {
 
 class _GameOverWidgetState extends State<GameOverWidget> {
   @override
-  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
@@ -18,8 +20,35 @@ class _GameOverWidgetState extends State<GameOverWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Das Spiel ist zuende!'),
-            Text('${widget.points}')
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: Text(
+                'Das Spiel ist zuende!',
+                style: DefaultTextStyle.of(context)
+                    .style
+                    .apply(fontSizeFactor: 1.7),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: Text(
+                'Sie haben ${widget.points} Punkte erzielt.',
+                style: DefaultTextStyle.of(context)
+                    .style
+                    .apply(fontSizeFactor: 1.7),
+              ),
+            ),
+            CustomButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute<HomeScreen>(
+                        builder: (context) => const HomeScreen()));
+                resetAll(0, 1, false);
+                countPoints = 0;
+              },
+              label: 'Home',
+            ),
           ],
         ),
       ),

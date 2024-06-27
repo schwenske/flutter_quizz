@@ -24,6 +24,13 @@ class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
   bool isFloatBlocked = true;
   int sumOfPoints = 0;
 
+  @override
+  void initState() {
+    resetAll(index, widget.questionCards.length, isVisible);
+    updateIsFloatBlocked(true);
+    super.initState();
+  }
+
   void updateIsFloatBlocked(bool newIsFloatBlocked) {
     setState(() {
       isFloatBlocked = newIsFloatBlocked;
@@ -35,6 +42,14 @@ class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              countPoints = 0;
+              widget.questionCards.clear();
+              Navigator.pop(context);
+            },
+          ),
           centerTitle: true,
           title: Text(
             "Quizzen",
@@ -71,6 +86,8 @@ class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
               onPressed: () {
                 setState(() {
                   index++;
+                  resetAll(index, widget.questionCards.length, isVisible);
+                  /*
                   isBlocked = false;
 
                   gameCardCurrentBool = [false, false, false, false];
@@ -84,7 +101,7 @@ class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
                   answerList = [];
                   if (index >= widget.questionCards.length) {
                     isVisible = false;
-                  }
+                  }*/
                   updateIsFloatBlocked(true);
                 });
               },
@@ -93,5 +110,21 @@ class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
         ),
       ),
     );
+  }
+}
+
+void resetAll(
+  int forIndex,
+  int intQuestionCards,
+  bool forIsVisible,
+) {
+  isBlocked = false;
+
+  gameCardCurrentBool = [false, false, false, false];
+  gameCardColor = [Colors.white, Colors.white, Colors.white, Colors.white];
+  correctAnswer = [false, false, false, false];
+  answerList = [];
+  if (forIndex >= intQuestionCards) {
+    forIsVisible = false;
   }
 }
