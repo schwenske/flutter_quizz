@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/user_ranking.dart';
-import 'package:flutter_quizz/data/repositories/firestore_question_rep.dart';
+import 'package:flutter_quizz/data/repositories/firestore_rep.dart';
 import 'package:flutter_quizz/widgets/list_error.dart';
 import 'package:flutter_quizz/widgets/list_loading.dart';
 import 'package:flutter_quizz/widgets/user_ranking_list_loaded.dart';
@@ -14,13 +14,13 @@ class Ranking extends StatefulWidget {
 }
 
 class _RankingState extends State<Ranking> {
-  late final FirestoreQuestionRep firestoreRankingRep;
+  late final FirestoreRep firestoreRankingRep;
   late Future<List<UserRanking>> userRankingBuilder;
 
   @override
   void initState() {
     super.initState();
-    firestoreRankingRep = FirestoreQuestionRep(
+    firestoreRankingRep = FirestoreRep(
       firestore: FirebaseFirestore.instance,
     );
     userRankingBuilder = firestoreRankingRep.getAllUserRankings();

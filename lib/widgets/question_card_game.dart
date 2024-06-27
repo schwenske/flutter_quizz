@@ -1,10 +1,11 @@
 import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
 import 'package:flutter_quizz/data/model/user_ranking.dart';
-import 'package:flutter_quizz/data/repositories/firestore_question_rep.dart';
+import 'package:flutter_quizz/data/repositories/firestore_rep.dart';
 import 'package:flutter_quizz/widgets/custom_button.dart';
 import 'package:flutter_quizz/widgets/question_card_single_loaded.dart';
 
@@ -38,7 +39,7 @@ List<bool> correctAnswer = [false, false, false, false];
 List<String> answerList = [];
 
 class _QuestionCardGameState extends State<QuestionCardGame> {
-  late final FirestoreQuestionRep firestoreQuestionRep;
+  late final FirestoreRep firestoreQuestionRep;
   String? currentUserId;
   late int userCounter;
   late int currentCounter;
@@ -46,8 +47,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
   @override
   void initState() {
     super.initState();
-    firestoreQuestionRep =
-        FirestoreQuestionRep(firestore: FirebaseFirestore.instance);
+    firestoreQuestionRep = FirestoreRep(firestore: FirebaseFirestore.instance);
   }
 
   @override

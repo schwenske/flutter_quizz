@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-//enum Tag { imt101, imt102, ipwa01, ipwa02 }
-
 class QuestionCard {
   final String id;
   final String tag;

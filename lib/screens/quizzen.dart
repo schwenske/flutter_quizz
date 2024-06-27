@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
-import 'package:flutter_quizz/data/repositories/firestore_question_rep.dart';
+import 'package:flutter_quizz/data/repositories/firestore_rep.dart';
 import 'package:flutter_quizz/widgets/list_error.dart';
 import 'package:flutter_quizz/widgets/list_loading.dart';
 import 'package:flutter_quizz/widgets/question_card_single_loaded.dart';
@@ -16,13 +16,13 @@ class Quizzen extends StatefulWidget {
 }
 
 class _QuizzenState extends State<Quizzen> {
-  late final FirestoreQuestionRep firestoreQuestionRep;
+  late final FirestoreRep firestoreQuestionRep;
   late Future<List<QuestionCard>> questionCardBuilder;
 
   @override
   void initState() {
     super.initState();
-    firestoreQuestionRep = FirestoreQuestionRep(
+    firestoreQuestionRep = FirestoreRep(
       firestore: FirebaseFirestore.instance,
     );
     questionCardBuilder = firestoreQuestionRep.getQuestionCardByTagAndCount(

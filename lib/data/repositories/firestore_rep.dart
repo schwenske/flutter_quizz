@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -14,10 +15,10 @@ const userRankingCollection = "userRankings";
 FirebaseAuth auth = FirebaseAuth.instance;
 String userId = auth.currentUser!.uid;
 
-class FirestoreQuestionRep implements QuestionRep, UserRanking {
+class FirestoreRep implements QuestionRep, UserRanking {
   final FirebaseFirestore firestore;
 
-  const FirestoreQuestionRep({
+  const FirestoreRep({
     required this.firestore,
   });
 
@@ -105,18 +106,6 @@ class FirestoreQuestionRep implements QuestionRep, UserRanking {
     return questionCardList;
   }
 
-  Stream<List<QuestionCard>> getQuestionCardStreamByUserId() {
-    return firestore
-        .collection(questionCardCollection)
-        .where('author', isEqualTo: userId)
-        .snapshots()
-        .map(
-          (snapshot) => snapshot.docs
-              .map((doc) => QuestionCard.fromMap(doc.data()))
-              .toList(),
-        );
-  }
-
   Future<List<QuestionCard>> getQuestionCardByUserId(String userId) async {
     final questionCardSnapshot = await firestore
         .collection(questionCardCollection)
@@ -156,8 +145,6 @@ class FirestoreQuestionRep implements QuestionRep, UserRanking {
   }
 
   Future<void> addUserRanking(UserRanking userRanking) async {
-    // final emptyDocument =
-    //await firestore.collection(userRankingCollection).add({});
     final String documentId = userId;
     final docRef = firestore.collection('userRankings').doc(documentId);
 
@@ -198,6 +185,12 @@ class FirestoreQuestionRep implements QuestionRep, UserRanking {
   }
 
   @override
+  UserRanking copyWith({String? id, int? counter}) {
+    // TODO: implement copyWith
+    throw UnimplementedError();
+  }
+
+  @override
   // TODO: implement counter
   int get counter => throw UnimplementedError();
 
@@ -214,12 +207,6 @@ class FirestoreQuestionRep implements QuestionRep, UserRanking {
   @override
   Map<String, dynamic> toMap() {
     // TODO: implement toMap
-    throw UnimplementedError();
-  }
-
-  @override
-  UserRanking copyWith({String? id, String? userId, int? counter}) {
-    // TODO: implement copyWith
     throw UnimplementedError();
   }
 }

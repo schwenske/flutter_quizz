@@ -1,9 +1,10 @@
 import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
-import 'package:flutter_quizz/data/repositories/firestore_question_rep.dart';
+import 'package:flutter_quizz/data/repositories/firestore_rep.dart';
 import 'package:flutter_quizz/widgets/custom_button.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
@@ -33,14 +34,13 @@ class _CreateQuestionsState extends State<CreateQuestions> {
   List<bool> boolList = [false, false, false, false];
   String? currentReason;
 
-  late final FirestoreQuestionRep firestoreQuestionRep;
+  late final FirestoreRep firestoreQuestionRep;
 
   @override
   void initState() {
     super.initState();
 
-    firestoreQuestionRep =
-        FirestoreQuestionRep(firestore: FirebaseFirestore.instance);
+    firestoreQuestionRep = FirestoreRep(firestore: FirebaseFirestore.instance);
   }
 
   @override
