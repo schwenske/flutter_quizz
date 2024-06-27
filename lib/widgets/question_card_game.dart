@@ -6,13 +6,22 @@ import 'package:flutter_quizz/data/model/question_card.dart';
 import 'package:flutter_quizz/data/model/user_ranking.dart';
 import 'package:flutter_quizz/data/repositories/firestore_question_rep.dart';
 import 'package:flutter_quizz/widgets/custom_button.dart';
+import 'package:flutter_quizz/widgets/question_card_single_loaded.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 String userId = auth.currentUser!.uid;
 
 class QuestionCardGame extends StatefulWidget {
   final QuestionCard questionCard;
-  const QuestionCardGame({super.key, required this.questionCard});
+  final bool isFloatBlocked;
+  final Function(bool) callBoolBack;
+
+  const QuestionCardGame({
+    super.key,
+    required this.questionCard,
+    required this.isFloatBlocked,
+    required this.callBoolBack,
+  });
   @override
   State<QuestionCardGame> createState() => _QuestionCardGameState();
 }
@@ -27,7 +36,6 @@ List<Color> gameCardColor = [
 List<bool> gameCardCurrentBool = [false, false, false, false];
 List<bool> correctAnswer = [false, false, false, false];
 List<String> answerList = [];
-int pointCounter = 0;
 
 class _QuestionCardGameState extends State<QuestionCardGame> {
   late final FirestoreQuestionRep firestoreQuestionRep;
@@ -112,6 +120,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                   onPressed: () async {
                     setState(() {
                       isBlocked = true;
+                      widget.callBoolBack(!isBlocked);
                     });
                     for (int i = 0;
                         i < widget.questionCard.options.keys.length;
@@ -170,6 +179,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                         _addUserRanking();
                       } else {
                         int newCounterValue = currentCounter + 5;
+                        countPoints += 5;
                         await firestoreQuestionRep.updateCounter(
                             userId, newCounterValue);
                       }

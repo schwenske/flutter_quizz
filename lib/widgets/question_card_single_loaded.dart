@@ -3,6 +3,8 @@ import 'package:flutter_quizz/data/model/question_card.dart';
 import 'package:flutter_quizz/widgets/game_over_widget.dart';
 import 'package:flutter_quizz/widgets/question_card_game.dart';
 
+int countPoints = 0;
+
 class QuestionCardSingleLoaded extends StatefulWidget {
   final List<QuestionCard> questionCards;
 
@@ -19,6 +21,14 @@ class QuestionCardSingleLoaded extends StatefulWidget {
 class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
   int index = 0;
   bool isVisible = true;
+  bool isFloatBlocked = true;
+  int sumOfPoints = 0;
+
+  void updateIsFloatBlocked(bool newIsFloatBlocked) {
+    setState(() {
+      isFloatBlocked = newIsFloatBlocked;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,37 +48,47 @@ class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
               child: Column(
                 children: [
                   if (index < widget.questionCards.length)
-                    QuestionCardGame(questionCard: widget.questionCards[index]),
+                    QuestionCardGame(
+                      questionCard: widget.questionCards[index],
+                      isFloatBlocked: true,
+                      callBoolBack: updateIsFloatBlocked,
+                    ),
                   if (index >= widget.questionCards.length)
-                    const GameOverWidget(),
+                    GameOverWidget(
+                      points: countPoints,
+                    ),
                 ],
               ),
             ),
           ),
         ),
-        floatingActionButton: Visibility(
-          visible: isVisible,
-          child: FloatingActionButton(
-            child: const Icon(Icons.arrow_right),
-            onPressed: () {
-              setState(() {
-                index++;
-                isBlocked = false;
+        floatingActionButton: AbsorbPointer(
+          absorbing: isFloatBlocked,
+          child: Visibility(
+            visible: isVisible,
+            child: FloatingActionButton(
+              child: const Icon(Icons.arrow_right),
+              onPressed: () {
+                setState(() {
+                  index++;
+                  isBlocked = false;
 
-                gameCardCurrentBool = [false, false, false, false];
-                gameCardColor = [
-                  Colors.white,
-                  Colors.white,
-                  Colors.white,
-                  Colors.white
-                ];
-                correctAnswer = [false, false, false, false];
-                answerList = [];
-                if (index >= widget.questionCards.length) {
-                  isVisible = false;
-                }
-              });
-            },
+                  gameCardCurrentBool = [false, false, false, false];
+                  gameCardColor = [
+                    Colors.white,
+                    Colors.white,
+                    Colors.white,
+                    Colors.white
+                  ];
+                  correctAnswer = [false, false, false, false];
+                  answerList = [];
+                  if (index >= widget.questionCards.length) {
+                    isVisible = false;
+                  }
+                  updateIsFloatBlocked(true);
+                });
+              },
+            ),
           ),
         ),
       ),
