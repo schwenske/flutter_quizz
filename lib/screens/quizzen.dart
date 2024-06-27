@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
 import 'package:flutter_quizz/data/repositories/firestore_question_rep.dart';
-import 'package:flutter_quizz/widgets/question_card_list_error.dart';
-import 'package:flutter_quizz/widgets/question_card_list_loading.dart';
+import 'package:flutter_quizz/widgets/list_error.dart';
+import 'package:flutter_quizz/widgets/list_loading.dart';
 import 'package:flutter_quizz/widgets/question_card_single_loaded.dart';
 
 class Quizzen extends StatefulWidget {
@@ -42,18 +42,18 @@ class _QuizzenState extends State<Quizzen> {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                 case ConnectionState.waiting:
-                  return const QuestionCardListLoading();
+                  return const ListLoading();
                 case ConnectionState.active:
                 case ConnectionState.done:
                   if (snapshot.hasData) {
                     return QuestionCardSingleLoaded(
                         questionCards: snapshot.data!);
                   } else if (snapshot.hasError) {
-                    return const QuestionCardListError(
+                    return const ListError(
                       message: "Error",
                     );
                   } else {
-                    return const QuestionCardListError(message: 'Error2');
+                    return const ListError(message: 'Error2');
                   }
               }
             },

@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
-class QuestionCardListLoading extends StatelessWidget {
-  const QuestionCardListLoading({super.key});
+class ListLoading extends StatelessWidget {
+  const ListLoading({super.key});
 
   @override
   Widget build(BuildContext context) {

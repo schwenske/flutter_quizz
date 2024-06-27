@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 
-class QuestionCardListError extends StatelessWidget {
+class ListError extends StatelessWidget {
   final String message;
 
-  const QuestionCardListError({
+  const ListError({
     super.key,
     required this.message,
   });
