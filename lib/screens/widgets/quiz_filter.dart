@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quizz/data/repositories/tag_rep.dart';
 import 'package:flutter_quizz/screens/quizzen.dart';
 import 'package:flutter_quizz/screens/widgets/custom_button.dart';
 
@@ -11,7 +12,7 @@ class QuizFilter extends StatefulWidget {
 
 class _QuizFilterState extends State<QuizFilter> {
   final _formKey = GlobalKey<FormState>();
-  List<String> tags = ['imt101', 'imt102', 'ipwa01', 'ipwa02'];
+  List<String> tags = tagRep;
   List<int> count = [3, 5, 10];
   late int? currentCount;
   String? currentTag;

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
 import 'package:flutter_quizz/data/repositories/firestore_rep.dart';
+import 'package:flutter_quizz/data/repositories/tag_rep.dart';
 import 'package:flutter_quizz/screens/widgets/custom_button.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
@@ -21,7 +22,8 @@ class CreateQuestions extends StatefulWidget {
 
 class _CreateQuestionsState extends State<CreateQuestions> {
   final _formKey = GlobalKey<FormState>();
-  List<String> tags = ['imt101', 'imt102', 'ipwa01', 'ipwa02'];
+
+  List<String> tags = tagRep;
   String? currentQuestion;
   String? currentTag;
   Map<String, bool> currentOption = <String, bool>{};
@@ -68,6 +70,8 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                           hint: Text(
                             "Bitte wählen Sie einen Kurs aus:",
                             style: Theme.of(context).textTheme.bodyLarge,
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
                           ),
                           items: [
                             for (int i = 0; i <= 3; i++)
@@ -79,6 +83,8 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                                       .textTheme
                                       .bodyLarge!
                                       .copyWith(color: Colors.brown),
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
                                 ),
                               ),
                           ],
