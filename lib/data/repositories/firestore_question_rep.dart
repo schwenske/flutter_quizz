@@ -186,6 +186,17 @@ class FirestoreQuestionRep implements QuestionRep, UserRanking {
     });
   }
 
+  Future<List<UserRanking>> getAllUserRankings() async {
+    final userRankingSnapshots =
+        await firestore.collection(userRankingCollection).get();
+
+    final userRankingList = userRankingSnapshots.docs
+        .map((snapshot) => UserRanking.fromMap(snapshot.data()))
+        .toList();
+
+    return userRankingList;
+  }
+
   @override
   // TODO: implement counter
   int get counter => throw UnimplementedError();
