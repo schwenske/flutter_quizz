@@ -78,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                                 MaterialPageRoute<MyQuestions>(
                                     builder: (context) => const MyQuestions()));
                           },
-                          label: "MyQuestions"),
+                          label: "Meine Fragen"),
                       CustomButton(
                           onPressed: () {
                             Navigator.push(
@@ -86,7 +86,7 @@ class HomeScreen extends StatelessWidget {
                                 MaterialPageRoute<Ranking>(
                                     builder: (context) => const Ranking()));
                           },
-                          label: "Ranking"),
+                          label: "Rangliste"),
                     ],
                   )
                 ],

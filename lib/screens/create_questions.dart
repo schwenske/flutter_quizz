@@ -8,6 +8,8 @@ import 'package:flutter_quizz/widgets/custom_button.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 String userId = auth.currentUser!.uid;
+User currentUser = FirebaseAuth.instance.currentUser!;
+String userName = currentUser.displayName ?? '';
 
 class CreateQuestions extends StatefulWidget {
   const CreateQuestions({super.key});
@@ -48,7 +50,7 @@ class _CreateQuestionsState extends State<CreateQuestions> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            "Frage erstellen",
+            "Erstellen Sie eine Frage $userName",
             style: Theme.of(context).textTheme.displaySmall,
           ),
         ),

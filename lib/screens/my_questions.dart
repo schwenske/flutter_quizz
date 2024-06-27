@@ -15,7 +15,6 @@ class MyQuestions extends StatefulWidget {
 
 class _MyQuestionsState extends State<MyQuestions> {
   late final FirestoreQuestionRep firestoreQuestionRep;
-  //late Stream<List<QuestionCard>> questionCardStream;
   late Future<List<QuestionCard>> questionCardBuilder;
 
   @override
