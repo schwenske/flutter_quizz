@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/user_ranking.dart';
 import 'package:flutter_quizz/data/repositories/firestore_rep.dart';
-import 'package:flutter_quizz/widgets/list_error.dart';
-import 'package:flutter_quizz/widgets/list_loading.dart';
-import 'package:flutter_quizz/widgets/user_ranking_list_loaded.dart';
+import 'package:flutter_quizz/screens/widgets/list_error.dart';
+import 'package:flutter_quizz/screens/widgets/list_loading.dart';
+import 'package:flutter_quizz/screens/widgets/user_ranking_list_loaded.dart';
 
 class Ranking extends StatefulWidget {
   const Ranking({super.key});

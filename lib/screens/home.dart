@@ -2,9 +2,9 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/screens/create_questions.dart';
 import 'package:flutter_quizz/screens/my_questions.dart';
-import 'package:flutter_quizz/screens/quiz_filter.dart';
 import 'package:flutter_quizz/screens/ranking.dart';
-import 'package:flutter_quizz/widgets/custom_button.dart';
+import 'package:flutter_quizz/screens/widgets/custom_button.dart';
+import 'package:flutter_quizz/screens/widgets/quiz_filter.dart';
 
 var titleName = "Quizz APP";
 const double buttonSpacing = 15;

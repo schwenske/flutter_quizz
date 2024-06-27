@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
 import 'package:flutter_quizz/data/repositories/firestore_rep.dart';
-import 'package:flutter_quizz/widgets/custom_button.dart';
+import 'package:flutter_quizz/screens/widgets/custom_button.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 String userId = auth.currentUser!.uid;

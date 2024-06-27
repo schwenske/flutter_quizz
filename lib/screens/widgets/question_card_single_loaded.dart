@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
-import 'package:flutter_quizz/widgets/game_over_widget.dart';
-import 'package:flutter_quizz/widgets/question_card_game.dart';
+import 'package:flutter_quizz/screens/widgets/game_over_widget.dart';
+import 'package:flutter_quizz/screens/widgets/question_card_game.dart';
 
 int countPoints = 0;
 

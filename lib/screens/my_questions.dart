@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
 import 'package:flutter_quizz/data/repositories/firestore_rep.dart';
-import 'package:flutter_quizz/widgets/list_error.dart';
-import 'package:flutter_quizz/widgets/list_loading.dart';
-import 'package:flutter_quizz/widgets/question_card_list_loaded.dart';
+import 'package:flutter_quizz/screens/widgets/list_error.dart';
+import 'package:flutter_quizz/screens/widgets/list_loading.dart';
+import 'package:flutter_quizz/screens/widgets/question_card_list_loaded.dart';
 
 class MyQuestions extends StatefulWidget {
   const MyQuestions({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quizz/screens/quizzen.dart';
-import 'package:flutter_quizz/widgets/custom_button.dart';
+import 'package:flutter_quizz/screens/widgets/custom_button.dart';
 
 class QuizFilter extends StatefulWidget {
   const QuizFilter({super.key});
