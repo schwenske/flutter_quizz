@@ -8,7 +8,6 @@ import 'package:flutter_quizz/data/model/user_ranking.dart';
 import 'package:flutter_quizz/data/repositories/firestore_rep.dart';
 import 'package:flutter_quizz/screens/widgets/custom_button.dart';
 import 'package:flutter_quizz/screens/widgets/question_card_single_loaded.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
