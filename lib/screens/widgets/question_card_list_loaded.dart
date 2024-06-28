@@ -16,23 +16,32 @@ class QuestionCardListLoaded extends StatelessWidget {
       itemBuilder: (context, index) {
         return ListTile(
           title: Text(
-            questionCards[index].question,
+            '${questionCards[index].question}\n',
             style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
-          tileColor: Colors.purple[50],
+          tileColor: Colors.white54,
           subtitle: Column(
             children: [
               for (int i = 0; i < questionCards[index].options.length; i++)
                 if (questionCards[index].options.values.elementAt(i) == true)
-                  Text(questionCards[index].options.keys.elementAt(i),
-                      style: TextStyle(color: Colors.green[800]))
+                  Container(
+                    color: Colors.green[200],
+                    child: Text(questionCards[index].options.keys.elementAt(i),
+                        style: const TextStyle(fontSize: 16)),
+                  )
                 else
-                  Text(
-                    questionCards[index].options.keys.elementAt(i),
-                    style: TextStyle(color: Colors.red[800]),
+                  Container(
+                    color: Colors.red[200],
+                    child: Text(
+                      questionCards[index].options.keys.elementAt(i),
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ),
-              Text(questionCards[index].reason),
+              Text(
+                '\n${questionCards[index].reason}',
+                style: const TextStyle(fontSize: 24),
+              ),
             ],
           ),
         );

@@ -178,8 +178,10 @@ class FirestoreRep implements QuestionRep, RankingRep {
   }
 
   Future<List<UserRanking>> getAllUserRankings() async {
-    final userRankingSnapshots =
-        await firestore.collection(userRankingCollection).get();
+    final userRankingSnapshots = await firestore
+        .collection(userRankingCollection)
+        .orderBy('counter', descending: true)
+        .get();
 
     final userRankingList = userRankingSnapshots.docs
         .map((snapshot) => UserRanking.fromMap(snapshot.data()))

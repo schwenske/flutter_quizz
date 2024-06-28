@@ -11,7 +11,7 @@ import 'package:flutter_quizz/screens/widgets/custom_button.dart';
 FirebaseAuth auth = FirebaseAuth.instance;
 String userId = auth.currentUser!.uid;
 User currentUser = FirebaseAuth.instance.currentUser!;
-String userName = currentUser.displayName ?? '';
+String userName = currentUser.displayName ?? 'unknown User';
 
 class CreateQuestions extends StatefulWidget {
   const CreateQuestions({super.key});

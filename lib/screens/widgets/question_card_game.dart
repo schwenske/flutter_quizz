@@ -8,6 +8,8 @@ import 'package:flutter_quizz/data/model/user_ranking.dart';
 import 'package:flutter_quizz/data/repositories/firestore_rep.dart';
 import 'package:flutter_quizz/screens/widgets/custom_button.dart';
 import 'package:flutter_quizz/screens/widgets/question_card_single_loaded.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 String userId = auth.currentUser!.uid;
@@ -160,7 +162,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                                     for (int i = 0; i < answerList.length; i++)
                                       Text(answerList[i]),
                                     Text(
-                                        'Bitte beachten Sie dabei folgenden Grund ${widget.questionCard.reason}'),
+                                        '\nBitte beachten Sie dabei folgenden Grund ${widget.questionCard.reason}'),
                                   ],
                                 ),
                               ),
@@ -210,7 +212,12 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                           });
                     }
                   },
-                  label: 'bestätigen')
+                  label: 'bestätigen'),
+              CustomButton(
+                  onPressed: () {
+                    _mailto(widget.questionCard.id, userId);
+                  },
+                  label: 'Frage melden')
             ],
           )
         ],
@@ -255,5 +262,15 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
   Future<int> checkCounter() async {
     userCounter = await firestoreQuestionRep.getUserRankingCounterById(userId);
     return userCounter;
+  }
+}
+
+_mailto(String questionCardId, String userId) async {
+  final url =
+      'mailto:support@email.com?subject=Meldung einer Frage&body=QuestionCardId: $questionCardId - gemeldet von User: $userId%0ABitte erklären Sie um welches Problem es sich handelt:';
+  if (await canLaunchUrlString(url)) {
+    await launchUrlString(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
