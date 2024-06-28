@@ -178,6 +178,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                       if (currentCounter == -1) {
                         currentUserId = userId;
                         currentCounter = 5;
+                        countPoints += 5;
                         _addUserRanking();
                       } else {
                         int newCounterValue = currentCounter + 5;
@@ -189,8 +190,8 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: const Text(
-                                  'Sie haben alles richtig beantwortet'),
+                              title: Text(
+                                  '$userName, Sie haben alles richtig beantwortet'),
                               content: const SingleChildScrollView(
                                 child: ListBody(
                                   children: [
@@ -223,23 +224,29 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
     try {
       await firestoreQuestionRep.addUserRanking(userRanking);
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.blueGrey,
-          content: Text(
-            "Erfolgreich hinzugefügt",
-          ),
-        ),
-      );
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('$userName, Sie haben alles richtig beantwortet'),
+              content: const SingleChildScrollView(
+                child: ListBody(
+                  children: [
+                    Text('Sie erhalten 5 Punkte'),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                    child: const Text('ok'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    })
+              ],
+            );
+          });
     } on Exception {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(
-            "Fehler beim Hinzufügen",
-          ),
-        ),
-      );
+      print('Fehler beim hinzufügen');
     }
     if (!mounted) return;
     Navigator.pop(context);
