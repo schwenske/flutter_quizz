@@ -26,7 +26,7 @@ class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
 
   @override
   void initState() {
-    resetAll(index, widget.questionCards.length, isVisible);
+    resetAll(index, widget.questionCards.length);
     updateIsFloatBlocked(true);
     super.initState();
   }
@@ -86,22 +86,11 @@ class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
               onPressed: () {
                 setState(() {
                   index++;
-                  resetAll(index, widget.questionCards.length, isVisible);
-                  /*
-                  isBlocked = false;
+                  resetAll(index, widget.questionCards.length);
 
-                  gameCardCurrentBool = [false, false, false, false];
-                  gameCardColor = [
-                    Colors.white,
-                    Colors.white,
-                    Colors.white,
-                    Colors.white
-                  ];
-                  correctAnswer = [false, false, false, false];
-                  answerList = [];
                   if (index >= widget.questionCards.length) {
                     isVisible = false;
-                  }*/
+                  }
                   updateIsFloatBlocked(true);
                 });
               },
@@ -116,7 +105,6 @@ class _QuestionCardSingleLoadedState extends State<QuestionCardSingleLoaded> {
 void resetAll(
   int forIndex,
   int intQuestionCards,
-  bool forIsVisible,
 ) {
   isBlocked = false;
 
@@ -124,7 +112,4 @@ void resetAll(
   gameCardColor = [Colors.white, Colors.white, Colors.white, Colors.white];
   correctAnswer = [false, false, false, false];
   answerList = [];
-  if (forIndex >= intQuestionCards) {
-    forIsVisible = false;
-  }
 }

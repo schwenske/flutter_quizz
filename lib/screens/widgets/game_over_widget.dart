@@ -44,7 +44,10 @@ class _GameOverWidgetState extends State<GameOverWidget> {
                     context,
                     MaterialPageRoute<HomeScreen>(
                         builder: (context) => const HomeScreen()));
-                resetAll(0, 1, false);
+                resetAll(
+                  0,
+                  1,
+                );
                 countPoints = 0;
               },
               label: 'Home',

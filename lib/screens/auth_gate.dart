@@ -17,45 +17,47 @@ class AuthGate extends StatelessWidget {
             providers: [
               EmailAuthProvider(),
             ],
-            headerBuilder: (context, constraints, shrinkOffset) {
-              return SafeArea(
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      children: [
-                        const Text(
-                          'Quizzen',
-                          style: TextStyle(fontSize: 24),
-                        ),
-                        const Text(''),
-                        const Text(
-                          'Achtung, verwenden Sie immer ein starkes Passwort!',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            if (await canLaunchUrlString(
-                                'https://www.datenschutz.org/passwort-generator/')) {
-                              await launchUrlString(
-                                  'https://www.datenschutz.org/passwort-generator/');
-                            } else {
-                              //
-                            }
-                          },
-                          child: const Text(
-                            'Passwort-Generator von datenschutz.org verwenden',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.blue, // Blau
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ),
-                      ],
+            subtitleBuilder: (context, action) {
+              return const Center(
+                child: Column(
+                  children: [
+                    Text(
+                      'Quizzen',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    Text(''),
+                  ],
+                ),
+              );
+            },
+            footerBuilder: (context, action) {
+              return Column(
+                children: [
+                  const Text(''),
+                  const Text(
+                    'Achtung, verwenden Sie immer ein starkes Passwort!',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      if (await canLaunchUrlString(
+                          'https://www.datenschutz.org/passwort-generator/')) {
+                        await launchUrlString(
+                            'https://www.datenschutz.org/passwort-generator/');
+                      } else {
+                        //
+                      }
+                    },
+                    child: const Text(
+                      'Passwort-Generator von datenschutz.org verwenden',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blue, // Blau
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
-                ),
+                ],
               );
             },
           );
