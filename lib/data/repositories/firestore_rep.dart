@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quizz/data/model/question_card.dart';
 import 'package:flutter_quizz/data/model/user_ranking.dart';
 import 'package:flutter_quizz/data/repositories/question_rep.dart';
+import 'package:flutter_quizz/data/repositories/ranking_rep.dart';
 
 const questionCardCollection = "questionCards";
 const userRankingCollection = "userRankings";
@@ -15,7 +16,7 @@ const userRankingCollection = "userRankings";
 FirebaseAuth auth = FirebaseAuth.instance;
 String userId = auth.currentUser!.uid;
 
-class FirestoreRep implements QuestionRep, UserRanking {
+class FirestoreRep implements QuestionRep, RankingRep {
   final FirebaseFirestore firestore;
 
   const FirestoreRep({
@@ -144,12 +145,15 @@ class FirestoreRep implements QuestionRep, UserRanking {
     return randomQuestionCardList;
   }
 
+  @override
   Future<void> addUserRanking(UserRanking userRanking) async {
     final String documentId = userId;
     final docRef = firestore.collection('userRankings').doc(documentId);
 
-    final userRankingData =
-        UserRanking(id: userRanking.id, counter: userRanking.counter);
+    final userRankingData = UserRanking(
+        id: userRanking.id,
+        counter: userRanking.counter,
+        username: userRanking.username);
     docRef.set(userRankingData.toMap()).then((_) {});
   }
 
@@ -182,31 +186,5 @@ class FirestoreRep implements QuestionRep, UserRanking {
         .toList();
 
     return userRankingList;
-  }
-
-  @override
-  UserRanking copyWith({String? id, int? counter}) {
-    // TODO: implement copyWith
-    throw UnimplementedError();
-  }
-
-  @override
-  // TODO: implement counter
-  int get counter => throw UnimplementedError();
-
-  @override
-  // TODO: implement id
-  String get id => throw UnimplementedError();
-
-  @override
-  String toJson() {
-    // TODO: implement toJson
-    throw UnimplementedError();
-  }
-
-  @override
-  Map<String, dynamic> toMap() {
-    // TODO: implement toMap
-    throw UnimplementedError();
   }
 }

@@ -11,6 +11,8 @@ import 'package:flutter_quizz/screens/widgets/question_card_single_loaded.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 String userId = auth.currentUser!.uid;
+User currentUser = FirebaseAuth.instance.currentUser!;
+String userName = currentUser.displayName ?? 'unknown User';
 
 class QuestionCardGame extends StatefulWidget {
   final QuestionCard questionCard;
@@ -216,8 +218,8 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
   }
 
   Future<void> _addUserRanking() async {
-    final userRanking =
-        UserRanking(id: currentUserId!, counter: currentCounter);
+    final userRanking = UserRanking(
+        id: currentUserId!, counter: currentCounter, username: userName);
     try {
       await firestoreQuestionRep.addUserRanking(userRanking);
       if (!mounted) return;
