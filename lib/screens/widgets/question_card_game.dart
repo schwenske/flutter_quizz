@@ -274,7 +274,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
 
 _mailto(String questionCardId, String userId) async {
   final url =
-      'mailto:support@email.com?subject=Meldung einer Frage&body=QuestionCardId: $questionCardId - gemeldet von User: $userId%0ABitte erklären Sie um welches Problem es sich handelt:';
+      'mailto:flutter-quizz-a9ab4@web.de?subject=Meldung einer Frage&body=QuestionCardId: $questionCardId - gemeldet von User: $userId%0ABitte erklären Sie um welches Problem es sich handelt:';
   if (await canLaunchUrlString(url)) {
     await launchUrlString(url);
   } else {
