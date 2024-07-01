@@ -30419,7 +30419,7 @@ this.a=b},
 OL:function OL(a){this.a=a},
 a1F(a,b){var s=0,r=A.x(t.z),q
 var $async$a1F=A.q(function(c,d){if(c===1)return A.u(d,r)
-while(true)switch(s){case 0:q="mailto:support@email.com?subject=Meldung einer Frage&body=QuestionCardId: "+a+" - gemeldet von User: "+b+"%0ABitte erkl\xe4ren Sie um welches Problem es sich handelt:"
+while(true)switch(s){case 0:q="mailto:flutter-quizz-a9ab4@web.de?subject=Meldung einer Frage&body=QuestionCardId: "+a+" - gemeldet von User: "+b+"%0ABitte erkl\xe4ren Sie um welches Problem es sich handelt:"
 s=5
 return A.B(A.axV(q),$async$a1F)
 case 5:s=d?2:4
