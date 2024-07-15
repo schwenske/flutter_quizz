@@ -5,6 +5,7 @@ import 'package:flutter_quizz/data/model/user_ranking.dart';
 /// Retrieves the currently authenticated user and their display name.
 User currentUser = FirebaseAuth.instance.currentUser!;
 String myName = currentUser.displayName ?? 'unknown User';
+String myId = currentUser.uid;
 
 /// Displays a list of user rankings, highlighting the current user's rank.
 class UserRankingListLoaded extends StatelessWidget {
@@ -29,9 +30,8 @@ class UserRankingListLoaded extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           // Highlights the current user's ranking with a green background
-          tileColor: userRankings[index].username == myName
-              ? Colors.green
-              : Colors.white54,
+          tileColor:
+              userRankings[index].id == myId ? Colors.green : Colors.white54,
           subtitle: Column(
             children: [
               // Displays the user's name
