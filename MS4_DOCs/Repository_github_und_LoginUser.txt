@@ -1,0 +1,6 @@
+Repository: https://github.com/schwenske/flutter_quizz.git
+
+AnwendungsURL: https://flutter-quizz-a9ab4.web.app/
+
+Benutzer: iu.testuser@nomail.com
+Passwort: testuser
