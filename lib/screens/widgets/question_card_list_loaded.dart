@@ -1,7 +1,9 @@
-import "package:flutter/material.dart";
-import "package:flutter_quizz/data/model/question_card.dart";
+import 'package:flutter/material.dart';
+import 'package:flutter_quizz/data/model/question_card.dart';
 
+/// Displays a list of question cards with their details.
 class QuestionCardListLoaded extends StatelessWidget {
+  /// The list of question cards to be displayed.
   final List<QuestionCard> questionCards;
 
   const QuestionCardListLoaded({
@@ -27,8 +29,10 @@ class QuestionCardListLoaded extends StatelessWidget {
                 if (questionCards[index].options.values.elementAt(i) == true)
                   Container(
                     color: Colors.green[200],
-                    child: Text(questionCards[index].options.keys.elementAt(i),
-                        style: const TextStyle(fontSize: 16)),
+                    child: Text(
+                      questionCards[index].options.keys.elementAt(i),
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   )
                 else
                   Container(

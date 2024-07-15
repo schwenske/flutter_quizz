@@ -8,11 +8,13 @@ import 'package:flutter_quizz/data/repositories/firestore_rep.dart';
 import 'package:flutter_quizz/data/repositories/tag_rep.dart';
 import 'package:flutter_quizz/screens/widgets/custom_button.dart';
 
+/// Retrieves the currently authenticated user and their ID.
 FirebaseAuth auth = FirebaseAuth.instance;
 String userId = auth.currentUser!.uid;
 User currentUser = FirebaseAuth.instance.currentUser!;
 String userName = currentUser.displayName ?? 'unknown User';
 
+/// Screen for creating new questions.
 class CreateQuestions extends StatefulWidget {
   const CreateQuestions({super.key});
 
@@ -23,25 +25,38 @@ class CreateQuestions extends StatefulWidget {
 class _CreateQuestionsState extends State<CreateQuestions> {
   final _formKey = GlobalKey<FormState>();
 
+  /// List of available tags for the question.
   List<String> tags = tagRep;
+
+  /// Stores the user-entered question text.
   String? currentQuestion;
+
+  /// Stores the selected tag for the question.
   String? currentTag;
+
+  /// Maps answer options to their correct/incorrect status.
   Map<String, bool> currentOption = <String, bool>{};
+
+  /// List of answer options.
   late List<String> answerList = [
     'Antwort1',
     'Antwort2',
     'Antwort3',
     'Antwort4'
   ];
+
+  /// List to track which answer options are selected as correct.
   List<bool> boolList = [false, false, false, false];
+
+  /// Stores the explanation for the correct answer.
   String? currentReason;
 
+  /// Firestore repository for question management.
   late final FirestoreRep firestoreQuestionRep;
 
   @override
   void initState() {
     super.initState();
-
     firestoreQuestionRep = FirestoreRep(firestore: FirebaseFirestore.instance);
   }
 
@@ -66,6 +81,7 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                     key: _formKey,
                     child: Column(
                       children: <Widget>[
+                        // Tag selection dropdown
                         DropdownButtonFormField<String>(
                           hint: Text(
                             "Bitte wählen Sie einen Kurs aus:",
@@ -94,6 +110,8 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                           validator: (value) =>
                               value == null ? "Bitte Tag auswählen" : null,
                         ),
+
+                        // Question text field
                         TextFormField(
                           style: Theme.of(context)
                               .textTheme
@@ -113,6 +131,8 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                             }
                           },
                         ),
+
+                        // Answer options with checkboxes
                         for (int i = 0; i < 4; i++)
                           ListTile(
                             title: TextFormField(
@@ -144,6 +164,8 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                               },
                             ),
                           ),
+
+                        // Explanation text field
                         TextFormField(
                           style: Theme.of(context)
                               .textTheme
@@ -164,15 +186,18 @@ class _CreateQuestionsState extends State<CreateQuestions> {
                             }
                           },
                         ),
+
+                        // Save button
                         CustomButton(
-                            onPressed: () async {
-                              currentOption[answerList[0]] = boolList[0];
-                              currentOption[answerList[1]] = boolList[1];
-                              currentOption[answerList[2]] = boolList[2];
-                              currentOption[answerList[3]] = boolList[3];
-                              _addQuestionCard();
-                            },
-                            label: 'Speichern')
+                          onPressed: () async {
+                            currentOption[answerList[0]] = boolList[0];
+                            currentOption[answerList[1]] = boolList[1];
+                            currentOption[answerList[2]] = boolList[2];
+                            currentOption[answerList[3]] = boolList[3];
+                            _addQuestionCard();
+                          },
+                          label: 'Speichern',
+                        ),
                       ],
                     ),
                   ),
@@ -188,12 +213,13 @@ class _CreateQuestionsState extends State<CreateQuestions> {
   Future<void> _addQuestionCard() async {
     if (_formKey.currentState?.validate() ?? false) {
       final questionCard = QuestionCard(
-          id: 'test',
-          tag: currentTag!,
-          author: userId,
-          question: currentQuestion!,
-          options: currentOption,
-          reason: currentReason!);
+        id: 'test', // Replace with a proper ID generation method
+        tag: currentTag!,
+        author: userId,
+        question: currentQuestion!,
+        options: currentOption,
+        reason: currentReason!,
+      );
 
       try {
         await firestoreQuestionRep.addQuestionCard(questionCard);
@@ -203,7 +229,7 @@ class _CreateQuestionsState extends State<CreateQuestions> {
           const SnackBar(
             backgroundColor: Colors.blueGrey,
             content: Text(
-              "Erfolgreich hinzugefügt",
+              "Erfolgreich hinzugefügt",
             ),
           ),
         );
@@ -212,7 +238,7 @@ class _CreateQuestionsState extends State<CreateQuestions> {
           const SnackBar(
             backgroundColor: Colors.red,
             content: Text(
-              "Fehler beim Hinzufügen",
+              "Fehler beim Hinzufügen",
             ),
           ),
         );

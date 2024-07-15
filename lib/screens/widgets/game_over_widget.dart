@@ -3,8 +3,10 @@ import 'package:flutter_quizz/screens/home.dart';
 import 'package:flutter_quizz/screens/widgets/custom_button.dart';
 import 'package:flutter_quizz/screens/widgets/question_card_single_loaded.dart';
 
+/// Widget displayed when the quiz game is over.
 class GameOverWidget extends StatefulWidget {
   final int points;
+
   const GameOverWidget({super.key, required this.points});
 
   @override
@@ -20,6 +22,7 @@ class _GameOverWidgetState extends State<GameOverWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Game over message
             Padding(
               padding: const EdgeInsets.all(15),
               child: Text(
@@ -29,6 +32,7 @@ class _GameOverWidgetState extends State<GameOverWidget> {
                     .apply(fontSizeFactor: 1.7),
               ),
             ),
+            // Display the player's score
             Padding(
               padding: const EdgeInsets.all(15),
               child: Text(
@@ -38,12 +42,16 @@ class _GameOverWidgetState extends State<GameOverWidget> {
                     .apply(fontSizeFactor: 1.7),
               ),
             ),
+            // Button to return to the home screen
             CustomButton(
               onPressed: () {
                 Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute<HomeScreen>(
-                        builder: (context) => const HomeScreen()));
+                  context,
+                  MaterialPageRoute<HomeScreen>(
+                    builder: (context) => const HomeScreen(),
+                  ),
+                );
+                // Reset game state here (assuming resetAll and countPoints exist)
                 resetAll(
                   0,
                   1,

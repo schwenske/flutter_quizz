@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+/// A custom button with a defined appearance and behavior.
 class CustomButton extends StatelessWidget {
+  /// The callback function to be executed when the button is pressed.
   final Function onPressed;
+
+  /// The label text displayed on the button.
   final String label;
 
   const CustomButton({super.key, required this.onPressed, required this.label});
@@ -13,6 +17,7 @@ class CustomButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () => onPressed(),
         child: Container(
+          /// Adjusts the button width based on screen size.
           width: MediaQuery.of(context).size.width > 600 ? 300 : 160,
           height: 40,
           decoration: const BoxDecoration(

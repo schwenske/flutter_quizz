@@ -3,6 +3,7 @@ import 'package:flutter_quizz/data/repositories/tag_rep.dart';
 import 'package:flutter_quizz/screens/quizzen.dart';
 import 'package:flutter_quizz/screens/widgets/custom_button.dart';
 
+/// Screen for filtering quizzes based on tag and question count.
 class QuizFilter extends StatefulWidget {
   const QuizFilter({super.key});
 
@@ -12,9 +13,17 @@ class QuizFilter extends StatefulWidget {
 
 class _QuizFilterState extends State<QuizFilter> {
   final _formKey = GlobalKey<FormState>();
+
+  /// List of available tags for filtering quizzes.
   List<String> tags = tagRep;
+
+  /// Possible question counts for filtering quizzes.
   List<int> count = [3, 5, 10];
+
+  /// Selected question count.
   late int? currentCount;
+
+  /// Selected tag for filtering quizzes.
   String? currentTag;
 
   @override
@@ -39,6 +48,7 @@ class _QuizFilterState extends State<QuizFilter> {
                     key: _formKey,
                     child: Column(
                       children: [
+                        // Dropdown for selecting the quiz tag
                         DropdownButtonFormField<String>(
                           hint: Text(
                             overflow: TextOverflow.ellipsis,
@@ -66,6 +76,7 @@ class _QuizFilterState extends State<QuizFilter> {
                           validator: (value) =>
                               value == null ? "Bitte Tag auswählen" : null,
                         ),
+                        // Dropdown for selecting the question count
                         DropdownButtonFormField<int>(
                           hint: Text(
                             overflow: TextOverflow.ellipsis,
@@ -91,21 +102,25 @@ class _QuizFilterState extends State<QuizFilter> {
                           validator: (value) =>
                               value == null ? "Bitte Anzahl auswählen" : null,
                         ),
+                        // Button to start the quiz
                         Padding(
                           padding: const EdgeInsets.only(top: 150),
                           child: CustomButton(
-                              onPressed: () {
-                                if (_formKey.currentState?.validate() ??
-                                    false) {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute<Quizzen>(
-                                          builder: (context) => Quizzen(
-                                              tag: currentTag!,
-                                              count: currentCount!)));
-                                }
-                              },
-                              label: "Quizzen"),
+                            onPressed: () {
+                              if (_formKey.currentState?.validate() ?? false) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute<Quizzen>(
+                                    builder: (context) => Quizzen(
+                                      tag: currentTag!,
+                                      count: currentCount!,
+                                    ),
+                                  ),
+                                );
+                              }
+                            },
+                            label: "Quizzen",
+                          ),
                         ),
                       ],
                     ),

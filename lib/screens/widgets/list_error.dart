@@ -1,6 +1,8 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
+/// A widget to display an error message within a list.
 class ListError extends StatelessWidget {
+  /// The error message to be displayed.
   final String message;
 
   const ListError({

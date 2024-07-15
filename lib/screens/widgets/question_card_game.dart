@@ -10,11 +10,13 @@ import 'package:flutter_quizz/screens/widgets/custom_button.dart';
 import 'package:flutter_quizz/screens/widgets/question_card_single_loaded.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+/// Retrieves the currently authenticated user and their ID.
 FirebaseAuth auth = FirebaseAuth.instance;
 String userId = auth.currentUser!.uid;
 User currentUser = FirebaseAuth.instance.currentUser!;
 String userName = currentUser.displayName ?? 'unknown User';
 
+/// Represents a single question card within the quiz game.
 class QuestionCardGame extends StatefulWidget {
   final QuestionCard questionCard;
   final bool isFloatBlocked;
@@ -26,10 +28,12 @@ class QuestionCardGame extends StatefulWidget {
     required this.isFloatBlocked,
     required this.callBoolBack,
   });
+
   @override
   State<QuestionCardGame> createState() => _QuestionCardGameState();
 }
 
+// Global variables to manage the state of the question card game
 bool isBlocked = false;
 List<Color> gameCardColor = [
   Colors.white,
@@ -41,6 +45,7 @@ List<bool> gameCardCurrentBool = [false, false, false, false];
 List<bool> correctAnswer = [false, false, false, false];
 List<String> answerList = [];
 
+/// Manages the state and logic for the QuestionCardGame widget.
 class _QuestionCardGameState extends State<QuestionCardGame> {
   late final FirestoreRep firestoreQuestionRep;
   String? currentUserId;
@@ -59,7 +64,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
     return Column(
       children: [
         AbsorbPointer(
-          absorbing: isBlocked,
+          absorbing: isBlocked, // Disables input if isBlocked is true
           child: Column(
             children: [
               Padding(
@@ -74,7 +79,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                       maxWidth: MediaQuery.of(context).size.width * 0.9,
                     ),
                     child: Text(
-                      widget.questionCard.question,
+                      widget.questionCard.question, // Displays the question
                       textAlign: TextAlign.center,
                       style: DefaultTextStyle.of(context)
                           .style
@@ -83,15 +88,17 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                   ),
                 ),
               ),
+              // Loops through the options and displays them as cards
               for (int i = 0; i < widget.questionCard.options.keys.length; i++)
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: Card(
-                    color: gameCardColor[i],
+                    color: gameCardColor[i], // Sets the color of the card
                     child: InkWell(
                       splashColor: Colors.blue,
                       onTap: () {
                         setState(() {
+                          // Toggles the color and state of the option when tapped
                           if (gameCardColor[i] == Colors.white) {
                             gameCardColor[i] = Colors.green;
                             gameCardCurrentBool[i] = true;
@@ -109,7 +116,8 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                           maxWidth: MediaQuery.of(context).size.width * 0.9,
                         ),
                         child: Text(
-                          widget.questionCard.options.keys.elementAt(i),
+                          widget.questionCard.options.keys
+                              .elementAt(i), // Displays the option text
                           style: DefaultTextStyle.of(context)
                               .style
                               .apply(fontSizeFactor: 1.3),
@@ -118,15 +126,17 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                     ),
                   ),
                 ),
+              // Button bar with a custom button to submit the answers
               ButtonBar(
                 alignment: MainAxisAlignment.center,
                 children: [
                   CustomButton(
                       onPressed: () async {
                         setState(() {
-                          isBlocked = true;
+                          isBlocked = true; // Blocks further input
                           widget.callBoolBack(!isBlocked);
                         });
+                        // Checks the answers
                         for (int i = 0;
                             i < widget.questionCard.options.keys.length;
                             i++) {
@@ -140,25 +150,31 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                                       .elementAt(i) ==
                                   gameCardCurrentBool[i])) {
                             correctAnswer[i] = true;
-                          } else {}
+                          } else {
+                            // If the answer is incorrect, mark it as false
+                            correctAnswer[i] = false;
+                          }
                         }
+                        // Check if any answer is incorrect
                         for (int i = 0; i < correctAnswer.length; i++) {
                           if (correctAnswer[i] == false) {
                             checkAnswer = false;
-                          } else {}
+                          }
                         }
                         if (checkAnswer == false) {
                           widget.questionCard.options.forEach((key, value) {
                             if (!value) {
-                              answerList.add(key);
+                              answerList.add(
+                                  key); // Add incorrect answers to the list
                             }
                           });
+                          // Show a dialog with the incorrect answers
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: const Text(
-                                      'Folgende Antworten sind falsch:'),
+                                      'The following answers are incorrect:'),
                                   content: SingleChildScrollView(
                                     child: ListBody(
                                       children: [
@@ -167,7 +183,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                                             i++)
                                           Text(answerList[i]),
                                         Text(
-                                            '\nBitte beachten Sie dabei folgenden Grund ${widget.questionCard.reason}'),
+                                            '\nPlease note the following reason ${widget.questionCard.reason}'),
                                       ],
                                     ),
                                   ),
@@ -181,6 +197,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                                 );
                               });
                         } else {
+                          // If all answers are correct, update the user's score and ranking
                           currentCounter = await checkCounter();
                           if (currentCounter == -1) {
                             currentUserId = userId;
@@ -193,16 +210,17 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                             await firestoreQuestionRep.updateCounter(
                                 userId, newCounterValue);
                           }
+                          // Show a dialog with a success message
                           showDialog(
                               context: context,
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: Text(
-                                      '$userName, Sie haben alles richtig beantwortet'),
+                                      '$userName, you answered everything correctly'),
                                   content: const SingleChildScrollView(
                                     child: ListBody(
                                       children: [
-                                        Text('Sie erhalten 5 Punkte'),
+                                        Text('You receive 5 points'),
                                       ],
                                     ),
                                   ),
@@ -217,21 +235,23 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                               });
                         }
                       },
-                      label: 'bestätigen'),
+                      label: 'confirm'),
                 ],
               )
             ],
           ),
         ),
+        // Button to report a question
         CustomButton(
             onPressed: () {
               _mailto(widget.questionCard.id, userId);
             },
-            label: 'Frage melden')
+            label: 'Report Question')
       ],
     );
   }
 
+  // Adds the user ranking to Firestore
   Future<void> _addUserRanking() async {
     final userRanking = UserRanking(
         id: currentUserId!, counter: currentCounter, username: userName);
@@ -242,11 +262,11 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('$userName, Sie haben alles richtig beantwortet'),
+              title: Text('$userName, you answered everything correctly'),
               content: const SingleChildScrollView(
                 child: ListBody(
                   children: [
-                    Text('Sie erhalten 5 Punkte'),
+                    Text('You receive 5 points'),
                   ],
                 ),
               ),
@@ -260,21 +280,23 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
             );
           });
     } on Exception {
-      print('Fehler beim hinzufügen');
+      print('Error adding user ranking');
     }
     if (!mounted) return;
     Navigator.pop(context);
   }
 
+  // Checks the user's counter value from Firestore
   Future<int> checkCounter() async {
     userCounter = await firestoreQuestionRep.getUserRankingCounterById(userId);
     return userCounter;
   }
 }
 
+// Launches an email client to report a question
 _mailto(String questionCardId, String userId) async {
   final url =
-      'mailto:flutter-quizz-a9ab4@web.de?subject=Meldung einer Frage&body=QuestionCardId: $questionCardId - gemeldet von User: $userId%0ABitte erklären Sie um welches Problem es sich handelt:';
+      'mailto:flutter-quizz-a9ab4@web.de?subject=Reporting a Question&body=QuestionCardId: $questionCardId - reported by User: $userId%0APlease explain the issue:';
   if (await canLaunchUrlString(url)) {
     await launchUrlString(url);
   } else {
