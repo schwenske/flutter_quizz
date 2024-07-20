@@ -174,7 +174,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: const Text(
-                                      'The following answers are incorrect:'),
+                                      'Die folgende Antwort ist falsch:'),
                                   content: SingleChildScrollView(
                                     child: ListBody(
                                       children: [
@@ -183,7 +183,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                                             i++)
                                           Text(answerList[i]),
                                         Text(
-                                            '\nPlease note the following reason ${widget.questionCard.reason}'),
+                                            '\nBitte nehmen Sie folgenden Grund zur Kenntnis ${widget.questionCard.reason}'),
                                       ],
                                     ),
                                   ),
@@ -216,11 +216,11 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: Text(
-                                      '$userName, you answered everything correctly'),
+                                      '$userName, Deine Antwort ist korrekt'),
                                   content: const SingleChildScrollView(
                                     child: ListBody(
                                       children: [
-                                        Text('You receive 5 points'),
+                                        Text('Du bekommst 5 Punkte'),
                                       ],
                                     ),
                                   ),
@@ -235,7 +235,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                               });
                         }
                       },
-                      label: 'confirm'),
+                      label: 'bestätigen'),
                 ],
               )
             ],
@@ -246,7 +246,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
             onPressed: () {
               _mailto(widget.questionCard.id, userId);
             },
-            label: 'Report Question')
+            label: 'Frage melden')
       ],
     );
   }
@@ -262,11 +262,11 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('$userName, you answered everything correctly'),
+              title: Text('$userName, Du hast alles richtig beantwortet'),
               content: const SingleChildScrollView(
                 child: ListBody(
                   children: [
-                    Text('You receive 5 points'),
+                    Text('Du bekommst 5 Punkte'),
                   ],
                 ),
               ),
