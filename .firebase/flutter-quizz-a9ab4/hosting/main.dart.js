@@ -26635,7 +26635,7 @@ q=b.Q
 if(a.Q!==q)return q?-1:1
 return 0},
 aRf(a,b){var s=A.a2(b).i("a5<1,ev>")
-return A.aQv(!0,A.a_(new A.a5(b,new A.a76(),s),!0,s.i("av.E")),a,B.LT,!0,B.HN,null)},
+return A.aQv(!0,A.a_(new A.a5(b,new A.a76(),s),!0,s.i("av.E")),a,B.LU,!0,B.HN,null)},
 aRd(a){a.c4()
 a.ba(A.aLB())},
 AG(a){var s=a.a,r=s instanceof A.uD?s:null
@@ -27226,7 +27226,7 @@ _.Q=!0
 _.at=_.as=!1
 _.$ti=d},
 Bz(a,b){var s
-if(a.j(0,b))return new A.LL(B.M2)
+if(a.j(0,b))return new A.LL(B.M3)
 s=A.b([],t.fJ)
 a.ng(new A.abb(b,A.b6("debugDidFindAncestor"),A.aF(t.n),s))
 return new A.LL(s)},
@@ -33165,7 +33165,7 @@ y_(){var s=this.Q
 s===$&&A.a()
 return s},
 y0(a,b,c,d){var s,r,q,p
-if(a<0||b<0)return B.M1
+if(a<0||b<0)return B.M2
 s=this.a
 s===$&&A.a()
 s=s.a
@@ -39793,7 +39793,7 @@ if(r.e!==B.pe){r.e=B.pe
 r.SH()}}return r.c.a.a2l(a)},
 SH(){var s,r
 for(s=this.r,r=0;r<s.length;++r)s[r].$1(this.e)},
-a2k(a){if(B.b.t(B.LH,a))return this.e===B.dR
+a2k(a){if(B.b.t(B.LI,a))return this.e===B.dR
 return!1}}
 A.a7K.prototype={
 $0(){return new A.eu(Date.now(),!1)},
@@ -53542,7 +53542,7 @@ return B.ae},
 $S:99}
 A.N9.prototype={
 D(a){var s=this,r=A.cU(a).b,q=r.ge2(),p=t.LO
-return A.ST(B.LR,s.d===!0,s.e,null,s.c,A.b([new A.uu($.aOy(),!1,"")],t.VS),B.Us,!1,new A.a7e(s),q,null,null,new A.pm("",A.b([new A.lL(r.ge4(),A.b([],p)),new A.Na(r.gee(),A.b([],p))],p)).gtW())}}
+return A.ST(B.LS,s.d===!0,s.e,null,s.c,A.b([new A.uu($.aOy(),!1,"")],t.VS),B.Us,!1,new A.a7e(s),q,null,null,new A.pm("",A.b([new A.lL(r.ge4(),A.b([],p)),new A.Na(r.gee(),A.b([],p))],p)).gtW())}}
 A.a7e.prototype={
 $1(a){return this.a.r.$1(a)},
 $S:38}
@@ -53672,7 +53672,7 @@ s=m.gct()
 r=$.aDh()
 q=t.VS
 p=t.LO
-s=A.d_(A.ST(B.Mj,!1,l,n,n,A.b([r],q),B.Bk,!1,new A.aeR(o),s,B.YM,n,new A.lL("",A.b([],p)).gtW()),n,90)
+s=A.d_(A.ST(B.Mj,!1,l,n,n,A.b([r],q),B.Bk,!1,new A.aeR(o),s,B.YN,n,new A.lL("",A.b([],p)).gtW()),n,90)
 o.a.toString
 l=m.gel()
 p=A.b([new A.lL(m.gen(),A.b([],p)),new A.Q6(m.gem(),A.b([],p))],p)
@@ -60602,7 +60602,7 @@ if(s==null)s=B.cg
 p=p.e
 o=r.gafP()
 r.a.toString
-return new A.FT(q,q,q,new A.as5(),q,q,q,q,q,p,B.Of,q,q,q,B.LU,r.gafX(),"",q,B.XE,s,q,o,q,q,B.pA,!1,!1,!1,!1,r.gafp(),!0,q,q,q,new A.q3(r,t.bT))},
+return new A.FT(q,q,q,new A.as5(),q,q,q,q,q,p,B.Of,q,q,q,B.LV,r.gafX(),"",q,B.XE,s,q,o,q,q,B.pA,!1,!1,!1,!1,r.gafp(),!0,q,q,q,new A.q3(r,t.bT))},
 D(a){var s,r=null,q=A.pW(!1,!1,this.a8w(a),r,r,r,r,!0,r,r,r,new A.as6(),r,r)
 this.a.toString
 s=this.d
@@ -72093,7 +72093,7 @@ return new A.jZ(r.a.cs(s.gjA()),r.b,r.c)},
 fH(a){var s=this.b
 return s.a.c.fH(a.a5(0,s.gjA()))},
 rU(){var s,r,q=this.b,p=q.gjA()
-if(!isFinite(p.a)||!isFinite(p.b))return B.M4
+if(!isFinite(p.a)||!isFinite(p.b))return B.M5
 s=q.f
 if(s==null){s=q.a.c.rU()
 q.f=s}if(p.j(0,B.e))r=s
@@ -81018,7 +81018,7 @@ break
 case 1:return A.v(q,r)}})
 return A.w($async$Hf,r)},
 abl(a,b){var s,r,q,p
-if(a===b)return B.M_
+if(a===b)return B.M0
 s=A.b([],t.QP)
 if(a==null)s.push(b)
 else{r=B.b.ii(B.f_,a)
@@ -85276,7 +85276,7 @@ h.IY()
 r=h.gabY()
 q=q.q2
 h.e!==$&&A.bw()
-h.e=new A.RD(s,new A.bg(B.O1,l,t.kr),new A.lJ(),p,B.fB,0,j,h.gaeg(),h.gaei(),r,B.fB,0,i,h.gaea(),h.gaec(),r,k,B.M3,f,g.CW,g.cx,g.cy,o,g,n,m,g.x,q,new A.Mk(),new A.Mk())
+h.e=new A.RD(s,new A.bg(B.O1,l,t.kr),new A.lJ(),p,B.fB,0,j,h.gaeg(),h.gaei(),r,B.fB,0,i,h.gaea(),h.gaec(),r,k,B.M4,f,g.CW,g.cx,g.cy,o,g,n,m,g.x,q,new A.Mk(),new A.Mk())
 return h},
 zF(a,b){var s,r,q,p=this,o=p.a.c,n=o.a.a.length
 if(n<a.b||n<a.a)return
@@ -88733,7 +88733,7 @@ if(b==null)return!1
 if(J.W(b)!==A.p(s))return!1
 return b instanceof A.cd&&b.a===s.a&&b.b===s.b&&b.c==s.c&&b.d===s.d&&A.dd(null,null)},
 gC(a){var s=this
-return A.S(s.a,s.b,s.c,s.d,A.bO(B.LZ),B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a)},
+return A.S(s.a,s.b,s.c,s.d,A.bO(B.M_),B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a)},
 k(a){return"IconData(U+"+B.d.tF(B.h.m5(this.a,16).toUpperCase(),5,"0")+")"}}
 A.qa.prototype={
 c2(a){return!this.w.j(0,a.w)},
@@ -89876,7 +89876,7 @@ c=g==null?(c.b.c.a.a&64)!==0:g
 g=s&&d
 b=s?d:b.ch
 if(b==null)b=B.dh
-f=new A.Cj(a1,a,q,p,l,o,n,a0,g===!0,m,k,h,c,j,i,b,new A.MP(d),B.LX)
+f=new A.Cj(a1,a,q,p,l,o,n,a0,g===!0,m,k,h,c,j,i,b,new A.MP(d),B.LY)
 if(!f.j(0,e.e))e.a7(new A.asn(e,f))},
 K9(){this.vt()},
 XQ(){if(this.d==null)this.vt()},
@@ -90233,7 +90233,7 @@ r.N(0,s.a0h(null,l))
 l.a.toString
 q=r.a
 p=0
-for(;!1;++p){o=B.LV[p]
+for(;!1;++p){o=B.LW[p]
 n=l.c
 n.toString
 m=new A.hT(o.JW(n),null,!0,B.mR,B.c7,new A.te(new ($.a2_())(B.c7)),B.c7)
@@ -90584,7 +90584,7 @@ D(a){var s,r,q=this,p=null,o=q.gadO(),n=A.nh(a),m=q.bo$,l=q.d
 l===$&&A.a()
 s=q.a.at
 if(l.gK()==null){r=q.gP4()
-r=J.j5(r.slice(0),A.a2(r).c)}else r=B.LW
+r=J.j5(r.slice(0),A.a2(r).c)}else r=B.LX
 return new A.q5(p,new A.d8(new A.adO(q,a),A.C4(B.cc,A.azw(!1,A.aFV(A.pW(!0,p,A.rO(m,new A.vp(r,s,l)),p,p,p,q.y,!1,p,p,p,p,p,!0),n)),o,q.gagi(),p,p,o),p,t.w3),p)}}
 A.adN.prototype={
 $1(a){var s=this.a.c
@@ -95699,7 +95699,7 @@ p.AR()
 return s.aN()},
 m(){var s,r,q,p,o=this
 for(s=o.b,r=s.length,q=o.gHi(),p=0;p<s.length;s.length===r||(0,A.Q)(s),++p)s[p].J(q)
-o.b=B.LY
+o.b=B.LZ
 o.y=!1
 o.dl()},
 hT(a,b){return a.t4(b)},
@@ -98725,7 +98725,7 @@ $2(a,b){return B.Fg},
 $S:601}
 A.a2J.prototype={
 $2(a,b){var s=null
-return A.c0(A.b([B.Bt,B.YN,A.nn(!1,s,!0,B.YQ,s,!0,s,s,s,s,s,s,s,s,s,new A.a2H(),s,s,s,s,s)],t.p),B.C,B.w,B.B)},
+return A.c0(A.b([B.Bt,B.YO,A.nn(!1,s,!0,B.YR,s,!0,s,s,s,s,s,s,s,s,s,new A.a2H(),s,s,s,s,s)],t.p),B.C,B.w,B.B)},
 $S:602}
 A.a2H.prototype={
 $0(){var s=0,r=A.x(t.H)
@@ -98867,7 +98867,7 @@ $0(){var s=A.nC(new A.aaj(),null,t.xP)
 A.bN(this.a,!1).h1(s)},
 $S:0}
 A.aaj.prototype={
-$1(a){var s=null,r=A.ty(s,!0,s,s,B.YL)
+$1(a){var s=null,r=A.ty(s,!0,s,s,B.YM)
 return new A.nY(B.Le,A.b([new A.EI(new A.aae())],t.sf),r,s,s,s)},
 $S:604}
 A.aae.prototype={
@@ -98962,7 +98962,7 @@ q.d=s
 q.e=s.xY()},
 D(a){var s=null,r=A.ty(s,!0,!0,s,A.b_("Rangliste",s,s,s,s,A.N(a).p2.c,s,s)),q=this.e
 q===$&&A.a()
-return A.f5(!0,A.o8(r,A.f5(!0,new A.aL(B.hi,new A.lx(q,new A.atH(),B.LS,s,t.d6),s),B.U,!0),s,s,s,s),B.U,!0)}}
+return A.f5(!0,A.o8(r,A.f5(!0,new A.aL(B.hi,new A.lx(q,new A.atH(),B.LT,s,t.d6),s),B.U,!0),s,s,s,s),B.U,!0)}}
 A.atH.prototype={
 $2(a,b){var s
 switch(b.a.a){case 0:case 1:return B.kS
@@ -99031,8 +99031,8 @@ m=A.bk(a,e,r).w
 h=f.a.c.e
 h=new A.b5(h,A.j(h).i("b5<1>")).cB(0,i)
 g=a.ad(l)
-k.push(new A.aL(B.hj,A.aEn(A.nn(!1,e,!0,new A.cE(new A.ag(o.a.a*0.8,m.a.a*0.9,p.a.b*0.1,n.a.b*0.15),A.b_(h,e,e,e,e,(g==null?B.dI:g).w.Ba(1.3),e,e),e),e,!0,e,e,e,e,e,e,e,e,e,new A.ats(f,i),e,e,B.cg,e,e),q),e))}k.push(new A.LF(B.cD,A.b([new A.iS(new A.att(d,f,a),"confirm",e)],j),e))
-return A.c0(A.b([A.azw(s,A.c0(k,B.C,B.w,B.B)),new A.iS(new A.atu(f),"Report Question",e)],j),B.C,B.w,B.B)},
+k.push(new A.aL(B.hj,A.aEn(A.nn(!1,e,!0,new A.cE(new A.ag(o.a.a*0.8,m.a.a*0.9,p.a.b*0.1,n.a.b*0.15),A.b_(h,e,e,e,e,(g==null?B.dI:g).w.Ba(1.3),e,e),e),e,!0,e,e,e,e,e,e,e,e,e,new A.ats(f,i),e,e,B.cg,e,e),q),e))}k.push(new A.LF(B.cD,A.b([new A.iS(new A.att(d,f,a),"best\xe4tigen",e)],j),e))
+return A.c0(A.b([A.azw(s,A.c0(k,B.C,B.w,B.B)),new A.iS(new A.atu(f),"Frage melden",e)],j),B.C,B.w,B.B)},
 yZ(){var s=0,r=A.x(t.H),q,p=2,o,n=this,m,l,k,j,i
 var $async$yZ=A.q(function(a,b){if(a===1){o=b
 s=p}while(true)switch(s){case 0:j=n.e
@@ -99135,15 +99135,15 @@ $S:614}
 A.atp.prototype={
 $1(a){var s,r,q=null,p=t.p,o=A.b([],p)
 for(s=0;r=$.aCr,s<r.length;++s)o.push(A.b_(r[s],q,q,q,q,q,q,q))
-o.push(A.b_("\nPlease note the following reason "+this.a.a.c.f,q,q,q,q,q,q,q))
+o.push(A.b_("\nBitte nehmen Sie folgenden Grund zur Kenntnis "+this.a.a.c.f,q,q,q,q,q,q,q))
 o=A.io(A.aGw(o),q,q)
-return A.a2p(A.b([A.wK(!1,B.mj,q,q,B.b2,q,q,q,q,new A.atm(a),q,q)],p),o,B.YO)},
+return A.a2p(A.b([A.wK(!1,B.mj,q,q,B.b2,q,q,q,q,new A.atm(a),q,q)],p),o,B.YK)},
 $S:84}
 A.atm.prototype={
 $0(){A.bN(this.a,!1).cQ()},
 $S:0}
 A.atq.prototype={
-$1(a){var s=null,r=A.b_($.azt()+", you answered everything correctly",s,s,s,s,s,s,s)
+$1(a){var s=null,r=A.b_($.azt()+", Deine Antwort ist korrekt",s,s,s,s,s,s,s)
 return A.a2p(A.b([A.wK(!1,B.mj,s,s,B.b2,s,s,s,s,new A.atl(a),s,s)],t.p),B.B1,r)},
 $S:84}
 A.atl.prototype={
@@ -99153,7 +99153,7 @@ A.atu.prototype={
 $0(){A.a1E(this.a.a.c.a,$.a26())},
 $S:18}
 A.atk.prototype={
-$1(a){var s=null,r=A.b_($.azt()+", you answered everything correctly",s,s,s,s,s,s,s)
+$1(a){var s=null,r=A.b_($.azt()+", Du hast alles richtig beantwortet",s,s,s,s,s,s,s)
 return A.a2p(A.b([A.wK(!1,B.mj,s,s,B.b2,s,s,s,s,new A.atj(a),s,s)],t.p),B.B1,r)},
 $S:84}
 A.atj.prototype={
@@ -102603,7 +102603,7 @@ B.F_=new A.alQ()
 B.as=new A.am8()
 B.cT=new A.ama()
 B.ed=new A.T5(0,0,0,0)
-B.LX=A.b(s([]),A.a9("E<a5H>"))
+B.LY=A.b(s([]),A.a9("E<a5H>"))
 B.a1k=new A.ame()
 B.bc={}
 B.lb=new A.bL(B.bc,[],t.li)
@@ -102651,9 +102651,9 @@ B.C=new A.pr(2,"center")
 B.bM=new A.T1(1,"down")
 B.l=new A.tS(0,"none")
 B.mh=new A.m(!0,null,null,null,null,null,24,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.YK=new A.eO("Quizzen",null,B.mh,null,null,null,null,null,null,null)
+B.YL=new A.eO("Quizzen",null,B.mh,null,null,null,null,null,null,null)
 B.Bt=new A.eO("",null,null,null,null,null,null,null,null,null)
-B.Lt=A.b(s([B.YK,B.Bt]),t.p)
+B.Lt=A.b(s([B.YL,B.Bt]),t.p)
 B.Hb=new A.lc(B.ar,B.w,B.B,B.C,null,B.bM,null,B.Lt,null)
 B.Fg=new A.hj(B.I,null,null,B.Hb,null)
 B.Fh=new A.tK(null,null,null,null,null,null,null,null,null)
@@ -103327,7 +103327,7 @@ B.LC=A.b(s(["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","D
 B.pC=A.b(s([0,0,32776,33792,1,10240,0,0]),t.t)
 B.LD=A.b(s([47,47,47,47,72,97,122,147]),t.t)
 B.pD=A.b(s(["text","multiline","number","phone","datetime","emailAddress","url","visiblePassword","name","address","none"]),t.s)
-B.LH=A.b(s(["click","scroll"]),t.s)
+B.LI=A.b(s(["click","scroll"]),t.s)
 B.kx=new A.i8(0,100)
 B.IZ=new A.i8(1,200)
 B.J_=new A.i8(2,300)
@@ -103337,28 +103337,28 @@ B.ky=new A.i8(5,600)
 B.J0=new A.i8(7,800)
 B.pa=new A.i8(8,900)
 B.pE=A.b(s([B.kx,B.IZ,B.J_,B.n,B.ab,B.ky,B.d2,B.J0,B.pa]),A.a9("E<i8>"))
-B.LR=A.b(s(["email"]),t.s)
-B.M_=A.b(s([]),t.QP)
+B.LS=A.b(s(["email"]),t.s)
+B.M0=A.b(s([]),t.QP)
 B.pH=A.b(s([]),A.a9("E<b1m>"))
-B.LT=A.b(s([]),t.D)
+B.LU=A.b(s([]),t.D)
 B.cB=A.b(s([]),t.sf)
-B.M2=A.b(s([]),t.fJ)
-B.M4=A.b(s([]),t.ER)
-B.LU=A.b(s([]),t.tc)
+B.M3=A.b(s([]),t.fJ)
+B.M5=A.b(s([]),t.ER)
+B.LV=A.b(s([]),t.tc)
 B.hS=A.b(s([]),t.jl)
-B.LW=A.b(s([]),t.wi)
-B.LV=A.b(s([]),A.a9("E<aB_<@>>"))
+B.LX=A.b(s([]),t.wi)
+B.LW=A.b(s([]),A.a9("E<aB_<@>>"))
 B.pI=A.b(s([]),A.a9("E<f4>"))
 B.kU=A.b(s([]),t.AO)
-B.LY=A.b(s([]),t.D1)
+B.LZ=A.b(s([]),t.D1)
 B.kV=A.b(s([]),t.QF)
-B.M1=A.b(s([]),t.Lx)
-B.M3=A.b(s([]),t.fm)
-B.LS=A.b(s([]),A.a9("E<hP>"))
+B.M2=A.b(s([]),t.Lx)
+B.M4=A.b(s([]),t.fm)
+B.LT=A.b(s([]),A.a9("E<hP>"))
 B.a1r=A.b(s([]),t.p)
 B.pG=A.b(s([]),t.t)
 B.pF=A.b(s([]),t.ee)
-B.LZ=A.b(s([]),t.XS)
+B.M_=A.b(s([]),t.XS)
 B.mC=new A.dy(0,"DoubleQuote")
 B.eg=new A.dy(1,"SingleQuote")
 B.b8=new A.dy(2,"HebrewLetter")
@@ -103517,28 +103517,28 @@ B.vC=new A.f(8589935151)
 B.Lk=A.b(s([B.vo,null,null,B.vC]),t.L)
 B.vp=new A.f(48)
 B.l7=new A.f(8589935152)
-B.LJ=A.b(s([B.vp,null,null,B.l7]),t.L)
+B.LK=A.b(s([B.vp,null,null,B.l7]),t.L)
 B.vq=new A.f(49)
 B.f8=new A.f(8589935153)
-B.LK=A.b(s([B.vq,null,null,B.f8]),t.L)
+B.LL=A.b(s([B.vq,null,null,B.f8]),t.L)
 B.vr=new A.f(50)
 B.db=new A.f(8589935154)
-B.LL=A.b(s([B.vr,null,null,B.db]),t.L)
+B.LM=A.b(s([B.vr,null,null,B.db]),t.L)
 B.vs=new A.f(51)
 B.f9=new A.f(8589935155)
-B.LM=A.b(s([B.vs,null,null,B.f9]),t.L)
+B.LN=A.b(s([B.vs,null,null,B.f9]),t.L)
 B.vt=new A.f(52)
 B.dc=new A.f(8589935156)
-B.LN=A.b(s([B.vt,null,null,B.dc]),t.L)
+B.LO=A.b(s([B.vt,null,null,B.dc]),t.L)
 B.vu=new A.f(53)
 B.l8=new A.f(8589935157)
-B.LO=A.b(s([B.vu,null,null,B.l8]),t.L)
+B.LP=A.b(s([B.vu,null,null,B.l8]),t.L)
 B.vv=new A.f(54)
 B.dd=new A.f(8589935158)
-B.LP=A.b(s([B.vv,null,null,B.dd]),t.L)
+B.LQ=A.b(s([B.vv,null,null,B.dd]),t.L)
 B.vw=new A.f(55)
 B.fa=new A.f(8589935159)
-B.LQ=A.b(s([B.vw,null,null,B.fa]),t.L)
+B.LR=A.b(s([B.vw,null,null,B.fa]),t.L)
 B.vx=new A.f(56)
 B.de=new A.f(8589935160)
 B.LF=A.b(s([B.vx,null,null,B.de]),t.L)
@@ -103547,7 +103547,7 @@ B.fb=new A.f(8589935161)
 B.LG=A.b(s([B.vy,null,null,B.fb]),t.L)
 B.Mm=A.b(s([B.f6,B.f6,B.i0,null]),t.L)
 B.hX=new A.f(4294967555)
-B.LI=A.b(s([B.hX,null,B.hX,null]),t.L)
+B.LJ=A.b(s([B.hX,null,B.hX,null]),t.L)
 B.bU=new A.f(4294968065)
 B.L0=A.b(s([B.bU,null,null,B.db]),t.L)
 B.bI=new A.f(4294968066)
@@ -103575,7 +103575,7 @@ B.L5=A.b(s([B.f3,null,null,B.f9]),t.L)
 B.f4=new A.f(4294968072)
 B.Ks=A.b(s([B.f4,null,null,B.fb]),t.L)
 B.Mp=A.b(s([B.cC,B.cC,B.d9,null]),t.L)
-B.O2=new A.cc(["*",B.Lg,"+",B.Lh,"-",B.Li,".",B.Lj,"/",B.Lk,"0",B.LJ,"1",B.LK,"2",B.LL,"3",B.LM,"4",B.LN,"5",B.LO,"6",B.LP,"7",B.LQ,"8",B.LF,"9",B.LG,"Alt",B.Mm,"AltGraph",B.LI,"ArrowDown",B.L0,"ArrowLeft",B.L1,"ArrowRight",B.L2,"ArrowUp",B.KP,"Clear",B.L9,"Control",B.Mn,"Delete",B.L7,"End",B.L3,"Enter",B.KZ,"Home",B.L4,"Insert",B.La,"Meta",B.Mo,"PageDown",B.L5,"PageUp",B.Ks,"Shift",B.Mp],A.a9("cc<t,X<f?>>"))
+B.O2=new A.cc(["*",B.Lg,"+",B.Lh,"-",B.Li,".",B.Lj,"/",B.Lk,"0",B.LK,"1",B.LL,"2",B.LM,"3",B.LN,"4",B.LO,"5",B.LP,"6",B.LQ,"7",B.LR,"8",B.LF,"9",B.LG,"Alt",B.Mm,"AltGraph",B.LJ,"ArrowDown",B.L0,"ArrowLeft",B.L1,"ArrowRight",B.L2,"ArrowUp",B.KP,"Clear",B.L9,"Control",B.Mn,"Delete",B.L7,"End",B.L3,"Enter",B.KZ,"Home",B.L4,"Insert",B.La,"Meta",B.Mo,"PageDown",B.L5,"PageUp",B.Ks,"Shift",B.Mp],A.a9("cc<t,X<f?>>"))
 B.KG=A.b(s([42,null,null,8589935146]),t.Z)
 B.KH=A.b(s([43,null,null,8589935147]),t.Z)
 B.KJ=A.b(s([45,null,null,8589935149]),t.Z)
@@ -104018,7 +104018,7 @@ B.HP=new A.n7(B.Bx)
 B.O7=new A.cc([B.fw,B.HQ,B.fv,B.HP],t.Fp)
 B.P1={KeyA:0,KeyB:1,KeyC:2,KeyD:3,KeyE:4,KeyF:5,KeyG:6,KeyH:7,KeyI:8,KeyJ:9,KeyK:10,KeyL:11,KeyM:12,KeyN:13,KeyO:14,KeyP:15,KeyQ:16,KeyR:17,KeyS:18,KeyT:19,KeyU:20,KeyV:21,KeyW:22,KeyX:23,KeyY:24,KeyZ:25,Digit1:26,Digit2:27,Digit3:28,Digit4:29,Digit5:30,Digit6:31,Digit7:32,Digit8:33,Digit9:34,Digit0:35,Minus:36,Equal:37,BracketLeft:38,BracketRight:39,Backslash:40,Semicolon:41,Quote:42,Backquote:43,Comma:44,Period:45,Slash:46}
 B.vI=new A.bL(B.P1,["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","0","-","=","[","]","\\",";","'","`",",",".","/"],t.li)
-B.M0=A.b(s([]),t.E)
+B.M1=A.b(s([]),t.E)
 B.Dh=new A.bj(-1,B.O,B.aA,B.i7,1)
 B.bQ=new A.l(603979776)
 B.Dl=new A.bj(0,B.O,B.bQ,B.bx,1)
@@ -104070,7 +104070,7 @@ B.Pa=new A.h(0,24)
 B.Dv=new A.bj(3,B.O,B.bQ,B.Pa,38)
 B.Dw=new A.bj(8,B.O,B.bH,B.w1,46)
 B.Kr=A.b(s([B.Df,B.Dv,B.Dw]),t.E)
-B.O8=new A.cc([0,B.M0,1,B.Km,2,B.Mq,3,B.Mr,4,B.Kn,6,B.Ko,8,B.Ln,9,B.Lo,12,B.Lc,16,B.M7,24,B.Kr],A.a9("cc<r,X<bj>>"))
+B.O8=new A.cc([0,B.M1,1,B.Km,2,B.Mq,3,B.Mr,4,B.Kn,6,B.Ko,8,B.Ln,9,B.Lo,12,B.Lc,16,B.M7,24,B.Kr],A.a9("cc<r,X<bj>>"))
 B.iI=new A.ap(B.pS,!1,!1,!1,!1,B.p)
 B.iJ=new A.ap(B.hW,!1,!1,!1,!1,B.p)
 B.S7=new A.ap(B.l6,!1,!1,!1,!1,B.p)
@@ -104842,9 +104842,9 @@ B.ST=new A.ap(B.fa,!1,!0,!1,!1,B.ba)
 B.SR=new A.ap(B.db,!0,!0,!1,!1,B.ba)
 B.SQ=new A.ap(B.dc,!0,!0,!1,!1,B.ba)
 B.SP=new A.ap(B.dd,!0,!0,!1,!1,B.ba)
-B.YR=new A.eO("You receive 5 points",null,null,null,null,null,null,null,null,null)
-B.M5=A.b(s([B.YR]),t.p)
-B.Kd=new A.C_(B.M5,null)
+B.YQ=new A.eO("Du bekommst 5 Punkte",null,null,null,null,null,null,null,null,null)
+B.LH=A.b(s([B.YQ]),t.p)
+B.Kd=new A.C_(B.LH,null)
 B.B1=new A.EL(null,null,B.Kd,null)
 B.SW=new A.K(1e5,1e5)
 B.B2=new A.K(10,10)
@@ -105301,13 +105301,13 @@ B.VH=new A.m(!1,null,null,null,null,null,14,B.ab,null,0.1,null,B.q,1.43,B.A,null
 B.WZ=new A.m(!1,null,null,null,null,null,12,B.ab,null,0.5,null,B.q,1.33,B.A,null,null,null,null,null,null,null,"tall labelMedium 2021",null,null,null,null)
 B.Vf=new A.m(!1,null,null,null,null,null,11,B.ab,null,0.5,null,B.q,1.45,B.A,null,null,null,null,null,null,null,"tall labelSmall 2021",null,null,null,null)
 B.YI=new A.dS(B.Xf,B.Vv,B.Xr,B.UR,B.Y9,B.Vh,B.UD,B.Vi,B.VB,B.We,B.WQ,B.VD,B.VH,B.WZ,B.Vf)
-B.YL=new A.eO("User Profile",null,null,null,null,null,null,null,null,null)
-B.YM=new A.eO("+",null,null,null,null,null,null,null,null,null)
-B.YN=new A.eO("Achtung, verwenden Sie immer ein starkes Passwort!",null,B.fC,null,null,null,null,null,null,null)
-B.YO=new A.eO("The following answers are incorrect:",null,null,null,null,null,null,null,null,null)
+B.YK=new A.eO("Die folgende Antwort ist falsch:",null,null,null,null,null,null,null,null,null)
+B.YM=new A.eO("User Profile",null,null,null,null,null,null,null,null,null)
+B.YN=new A.eO("+",null,null,null,null,null,null,null,null,null)
+B.YO=new A.eO("Achtung, verwenden Sie immer ein starkes Passwort!",null,B.fC,null,null,null,null,null,null,null)
 B.YP=new A.eO("MyQuestions",null,null,null,null,null,null,null,null,null)
 B.XI=new A.m(!0,B.cg,null,null,null,null,16,null,null,null,null,null,null,null,null,null,null,B.mc,null,null,null,null,null,null,null,null)
-B.YQ=new A.eO("Passwort-Generator von datenschutz.org verwenden",null,B.XI,null,null,null,null,null,null,null)
+B.YR=new A.eO("Passwort-Generator von datenschutz.org verwenden",null,B.XI,null,null,null,null,null,null,null)
 B.mj=new A.eO("ok",null,null,null,null,null,null,null,null,null)
 B.a1x=new A.alk(0,"system")
 B.PA=new A.h(0.05,0)
