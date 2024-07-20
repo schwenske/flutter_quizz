@@ -183,7 +183,7 @@ class _QuestionCardGameState extends State<QuestionCardGame> {
                                             i++)
                                           Text(answerList[i]),
                                         Text(
-                                            '\nBitte nehmen Sie folgenden Grund zur Kenntnis ${widget.questionCard.reason}'),
+                                            '\nBitte nehmen Sie folgenden Grund zur Kenntnis:\n ${widget.questionCard.reason}'),
                                       ],
                                     ),
                                   ),
